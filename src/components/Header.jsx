@@ -1,10 +1,17 @@
 import React from "react";
+import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
   return (
     <div className="header">
-      <h1 className="header-title">Welcome to Saarthi</h1>
-      <input className="header-search" type="text" placeholder="Search..." />
+      <input
+        className="header-search"
+        type="text"
+        placeholder="Search..."
+      ></input>
+      <div className="header-user">
+        <CgProfile size={35} />
+      </div>
     </div>
   );
 };

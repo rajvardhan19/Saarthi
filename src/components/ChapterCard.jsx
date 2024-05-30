@@ -1,12 +1,16 @@
 import React from "react";
-
-const ChapterCard = ({ title }) => {
+import { FaHeart } from "react-icons/fa";
+const ChapterCard = ({ title, imageSrc }) => {
   return (
     <div className="chapter-card">
-      <div className="chapter-title">{title}</div>
-      <div className="chapter-controls">
-        <span className="favorite">♥</span>
-        <span className="more-options">⋮</span>
+      <img src={imageSrc} alt={title} className="chapter-image" />
+      <div className="chapter-info">
+        <div className="chapter-controls">
+          <div className="chapter-title">{title}</div>
+          <span className="favorite">
+            <FaHeart />
+          </span>
+        </div>
       </div>
     </div>
   );
