@@ -125,6 +125,46 @@
 .chapter-controls span {
   cursor: pointer;
 }
+.chapter-card-audiobook {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 180px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.chapter-image-audiobook {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chapter-details-audiobook {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.chapter-title-audiobook {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.chapter-controls-audiobook {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chapter-controls-audiobook span {
+  cursor: pointer;
+}
 
 .more-options {
   margin-right: 5px;
@@ -135,6 +175,9 @@
 }
 /* RECENTLY READ */
 .recently-read-section {
+  margin-top: 25px;
+}
+.recently-heard-section {
   margin-top: 25px;
 }
 .recently-read-card {
@@ -191,7 +234,66 @@
   height: 100%;
   object-fit: cover;
 }
+.recently-heard-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 360px;
+  height: 80px;
+}
+
+.recently-heard-image {
+  margin-top: 10px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.recently-heard-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recently-heard-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.recently-heard-chapter {
+  font-size: 14px;
+  color: #666;
+}
+.recently-heard-left {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 180px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-weight: bold;
+}
+
+.recently-heard-left image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 .main-content {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
+.main-content-audiobook {
   padding: 20px;
   flex: 1;
   overflow-y: auto;
@@ -221,8 +323,36 @@
   background-color: gray;
   color: #fff;
 }
+.section-header-audiobook {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.section-header-audiobook h2 {
+  margin: 0;
+}
+
+.section-header-audiobook button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.section-header-audiobook button:hover {
+  background-color: gray;
+  color: #fff;
+}
 
 .chapter-list {
+  display: flex;
+  gap: 20px;
+}
+.chapter-list-audiobook {
   display: flex;
   gap: 20px;
 }
@@ -233,6 +363,16 @@
 }
 
 .recently-read-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.recently-heard-list {
+  display: flex;
+  gap: 20px;
+}
+
+.recently-heard-right {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -288,4 +428,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+/* Audio Player */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.chapter-image-audio-player {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 25px;
+  height: 70%;
+  object-fit: cover;
 }
