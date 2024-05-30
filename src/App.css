@@ -281,3 +281,11 @@
   border-radius: 4px;
   cursor: pointer;
 }
+/* Pdf Viewer */
+.pdf-viewer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

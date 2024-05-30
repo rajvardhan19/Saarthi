@@ -12,12 +12,36 @@ const MainContent = () => {
           <button>View all</button>
         </div>
         <div className="chapter-list">
-          <ChapterCard title="Chapter 1" imageSrc="chapter1.jpeg" />
-          <ChapterCard title="Chapter 2" imageSrc="chapter2.jpeg" />
-          <ChapterCard title="Chapter 3" imageSrc="chapter3.jpeg" />
-          <ChapterCard title="Chapter 4" imageSrc="chapter4.jpeg" />
-          <ChapterCard title="Chapter 5" imageSrc="chapter5.jpeg" />
-          <ChapterCard title="Chapter 6" imageSrc="chapter6.jpeg" />
+          <ChapterCard
+            title="Chapter 1"
+            imageSrc="chapter1.jpeg"
+            chapterId="1"
+          />
+          <ChapterCard
+            title="Chapter 2"
+            imageSrc="chapter2.jpeg"
+            chapterId="2"
+          />
+          <ChapterCard
+            title="Chapter 3"
+            imageSrc="chapter3.jpeg"
+            chapterId="3"
+          />
+          <ChapterCard
+            title="Chapter 4"
+            imageSrc="chapter4.jpeg"
+            chapterId="4"
+          />
+          <ChapterCard
+            title="Chapter 5"
+            imageSrc="chapter5.jpeg"
+            chapterId="5"
+          />
+          <ChapterCard
+            title="Chapter 6"
+            imageSrc="chapter6.jpeg"
+            chapterId="6"
+          />
         </div>
       </div>
       <div className="recently-read-section">

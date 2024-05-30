@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
-const ChapterCard = ({ title, imageSrc }) => {
+
+const ChapterCard = ({ title, imageSrc, chapterId }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/chapter/${chapterId}`);
+  };
   return (
-    <div className="chapter-card">
+    <div className="chapter-card" onClick={handleCardClick}>
       <img src={imageSrc} alt={title} className="chapter-image" />
       <div className="chapter-info">
         <div className="chapter-controls">

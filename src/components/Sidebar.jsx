@@ -23,7 +23,13 @@ const Sidebar = () => {
         >
           Saarthi Chatbot
         </NavLink>
-        <div className="sidebar-item">Audiobook</div>
+        <NavLink
+          to="/audiobook"
+          className="sidebar-item"
+          activeClassName="active"
+        >
+          Audiobook
+        </NavLink>
         <div className="sidebar-item">Shlok of the day</div>
         <div className="sidebar-item">Settings</div>
       </div>
