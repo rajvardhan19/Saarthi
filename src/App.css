@@ -3,6 +3,10 @@
   font-family: Arial, sans-serif;
   height: 100vh;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
 
 .main {
   flex: 1;
@@ -442,4 +446,8 @@
   margin-top: 25px;
   height: 70%;
   object-fit: cover;
+}
+/* PDF Viewer */
+.pdf-viewer {
+  margin-bottom: 15px;
 }
