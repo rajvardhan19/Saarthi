@@ -1,47 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import RecentlyRead from "./RecentlyRead";
 import RecentlyReadLeft from "./RecentlyReadLeft";
 
 const MainContent = () => {
+  const [chapters, setChapters] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchChapters = async () => {
+      const { data, error } = await supabase.from("chapters").select("*"); // Adjust this query to match your database schema
+
+      if (error) {
+        console.error("Error fetching chapters:", error);
+      } else {
+        setChapters(data);
+      }
+      setLoading(false);
+    };
+
+    fetchChapters();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="main-content">
-      <div className="chapters">
-        <div className="section-header">
-          <h2>Chapters</h2>
-          <button>View all</button>
-        </div>
-        <div className="chapter-list">
-          <ChapterCard
-            title="Chapter 1"
-            imageSrc="chapter1.jpeg"
-            chapterId="1"
-          />
-          <ChapterCard
-            title="Chapter 2"
-            imageSrc="chapter2.jpeg"
-            chapterId="2"
-          />
-          <ChapterCard
-            title="Chapter 3"
-            imageSrc="chapter3.jpeg"
-            chapterId="3"
-          />
-          <ChapterCard
-            title="Chapter 4"
-            imageSrc="chapter4.jpeg"
-            chapterId="4"
-          />
-          <ChapterCard
-            title="Chapter 5"
-            imageSrc="chapter5.jpeg"
-            chapterId="5"
-          />
-          <ChapterCard
-            title="Chapter 6"
-            imageSrc="chapter6.jpeg"
-            chapterId="6"
-          />
+    <div>
+      <div className="main-content">
+        <div className="chapters">
+          <div className="section-header">
+            <h2>Chapters</h2>
+            <button>View all</button>
+          </div>
+          <div className="chapter-list">
+            {chapters.map((chapter) => (
+              <ChapterCard
+                key={chapter.id}
+                title={chapter.title}
+                imageSrc={chapter.image_url} // Ensure this matches your schema
+                chapterId={chapter.id}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <div className="recently-read-section">
@@ -83,6 +86,8 @@ const MainContent = () => {
           </div>
         </div>
       </div>
+      <div />
+      <div />
     </div>
   );
 };

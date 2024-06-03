@@ -4,15 +4,16 @@ import RecentlyHeard from "./RecentlyHeard";
 import RecentlyHeardLeft from "./RecentlyHeardLeft";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
 
-const AudioBook = () => {
+const AudioBook = ({ selectedLanguage }) => {
   const [chapters, setChapters] = useState([]);
 
   useEffect(() => {
     const fetchChapters = async () => {
       const { data, error } = await supabase.from("chapters").select("*");
       if (error) {
-        console.error(error);
+        console.error("Error fetching chapters:", error);
       } else {
+        console.log("Fetched chapters:", data);
         setChapters(data);
       }
     };
@@ -28,14 +29,19 @@ const AudioBook = () => {
           <button>View all</button>
         </div>
         <div className="chapter-list-audiobook">
-          {chapters.map((chapter) => (
-            <ChapterCardAudiobook
-              key={chapter.id}
-              title={chapter.title}
-              imageSrc={chapter.image_url}
-              chapterId={chapter.id}
-            />
-          ))}
+          {chapters.length === 0 ? (
+            <p>No chapters found</p>
+          ) : (
+            chapters.map((chapter) => (
+              <ChapterCardAudiobook
+                key={chapter.id}
+                title={chapter.title}
+                imageSrc={chapter.image_url}
+                chapterId={chapter.id}
+                selectedLanguage={selectedLanguage}
+              />
+            ))
+          )}
         </div>
       </div>
       <div className="recently-heard-section">

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ setActiveClassName }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -13,6 +13,7 @@ const Sidebar = () => {
           to="/read-chapters"
           className="sidebar-item"
           activeClassName="active"
+          onClick={() => setActiveClassName("read-chapters")}
         >
           Read Chapters
         </NavLink>
@@ -20,6 +21,7 @@ const Sidebar = () => {
           to="/chatbot"
           className="sidebar-item"
           activeClassName="active"
+          onClick={() => setActiveClassName("chatbot")}
         >
           Saarthi Chatbot
         </NavLink>
@@ -27,11 +29,13 @@ const Sidebar = () => {
           to="/audiobook"
           className="sidebar-item"
           activeClassName="active"
+          onClick={() => setActiveClassName("audiobook")}
         >
           Audiobook
         </NavLink>
         <div className="sidebar-item">Shlok of the day</div>
-        <div className="sidebar-item">Settings</div>
+        <div className="sidebar-item">Aartis</div>
+        <div className="sidebar-item">Mythology Stories</div>
       </div>
     </div>
   );

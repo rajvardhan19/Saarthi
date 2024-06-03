@@ -2,11 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
-const ChapterCardAudiobook = ({ title, imageSrc, chapterId }) => {
+const ChapterCardAudiobook = ({
+  title,
+  imageSrc,
+  chapterId,
+  selectedLanguage,
+}) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/audio/${chapterId}`);
+    navigate(`/audio/${chapterId}?language=${selectedLanguage}`);
   };
 
   return (

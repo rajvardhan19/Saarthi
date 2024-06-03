@@ -2,27 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import supabase from "./supabaseClient";
 
-const PdfViewer = () => {
+const PdfViewer = ({ selectedLanguage }) => {
   const { chapterId } = useParams();
   const [pdfUrl, setPdfUrl] = useState(null);
 
   useEffect(() => {
     const fetchPdfUrl = async () => {
-      const { data, error } = await supabase
-        .from("chapters")
-        .select("pdf_url")
-        .eq("id", chapterId)
-        .single();
+      const filename =
+        selectedLanguage === "english"
+          ? `chapter${chapterId}.pdf`
+          : `${selectedLanguage}chapter${chapterId}.pdf`;
+
+      const { data, error } = await supabase.storage
+        .from("books")
+        .getPublicUrl(filename);
 
       if (error) {
         console.error("Error fetching PDF URL:", error);
       } else {
-        setPdfUrl(data.pdf_url);
+        setPdfUrl(data.publicUrl);
       }
     };
 
     fetchPdfUrl();
-  }, [chapterId]);
+  }, [chapterId, selectedLanguage]);
 
   if (!pdfUrl) {
     return <div>Loading...</div>;
