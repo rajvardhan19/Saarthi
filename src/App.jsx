@@ -7,6 +7,8 @@ import PdfViewer from "./components/PdfViewer";
 import AudioBook from "./components/AudioBook";
 import Chatbot from "./components/Chatbot";
 import AudioPlayer from "./components/AudioPlayer";
+import SearchPage from "./components/SearchPage";
+import SearchPageAudiobook from "./components/SearchPageAudiobook";
 import "./App.css";
 
 const App = () => {
@@ -28,6 +30,7 @@ const App = () => {
               path="/chapter/:chapterId"
               element={<PdfViewer selectedLanguage={selectedLanguage} />}
             />
+            <Route path="/search" element={<SearchPage />} />
             <Route path="/chatbot" element={<Chatbot />} />
             <Route
               path="/audiobook"
@@ -36,6 +39,12 @@ const App = () => {
             <Route
               path="/audio/:chapterId"
               element={<AudioPlayer selectedLanguage={selectedLanguage} />}
+            />
+            <Route
+              path="/search-audiobook"
+              element={
+                <SearchPageAudiobook selectedLanguage={selectedLanguage} />
+              }
             />
           </Routes>
         </div>

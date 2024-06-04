@@ -294,8 +294,9 @@ body {
 }
 .main-content {
   padding: 20px;
-  flex: 1;
-  overflow-y: auto;
+}
+.chapters {
+  margin-bottom: 20px;
 }
 .main-content-audiobook {
   padding: 20px;
@@ -353,12 +354,17 @@ body {
 }
 
 .chapter-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columns */
   gap: 20px;
 }
 .chapter-list-audiobook {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columns */
   gap: 20px;
+}
+.recently-read-section {
+  margin-top: 20px;
 }
 
 .recently-read-list {
@@ -366,10 +372,10 @@ body {
   gap: 20px;
 }
 
-.recently-read-right {
+.recently-read-list {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 .recently-heard-list {
   display: flex;
@@ -483,4 +489,85 @@ body {
 /* PDF Viewer */
 .pdf-viewer {
   margin-bottom: 15px;
+}
+.search-page {
+  padding: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.search-result-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+}
+
+.search-result-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.search-result-info {
+  font-size: 14px;
+}
+
+.search-result-title {
+  font-weight: bold;
+}
+.dropdown {
+  margin: 15px;
+  height: 40px;
+  width: 160px;
+}
+
+.login-button,
+.signup-button {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 12px;
+  width: 80px;
+}
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }

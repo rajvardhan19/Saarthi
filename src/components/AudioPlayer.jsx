@@ -12,6 +12,7 @@ const AudioPlayer = ({ selectedLanguage }) => {
   const [chapter, setChapter] = useState(null);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [audioUrl, setAudioUrl] = useState(null);
 
   useEffect(() => {
     const fetchChapter = async () => {
@@ -31,14 +32,31 @@ const AudioPlayer = ({ selectedLanguage }) => {
   }, [chapterId]);
 
   useEffect(() => {
-    if (chapter) {
-      const language =
-        new URLSearchParams(location.search).get("language") ||
-        selectedLanguage;
-      const audioUrl = chapter[`${language}_audio_url`] || chapter.audio_url;
+    const fetchAudioUrl = async () => {
+      const filename =
+        selectedLanguage === "english"
+          ? `chapter${chapterId}.mp3`
+          : `${selectedLanguage}chapter${chapterId}.mp3`;
+
+      const { data, error } = await supabase.storage
+        .from("audiobooks")
+        .getPublicUrl(filename);
+
+      if (error) {
+        console.error("Error fetching audio URL:", error);
+      } else {
+        setAudioUrl(data.publicUrl);
+      }
+    };
+
+    fetchAudioUrl();
+  }, [chapterId, selectedLanguage]);
+
+  useEffect(() => {
+    if (audioUrl) {
       audioRef.current.src = audioUrl;
     }
-  }, [chapter, location.search, selectedLanguage]);
+  }, [audioUrl]);
 
   useEffect(() => {
     if (isPlaying && audioRef.current) {
@@ -46,7 +64,7 @@ const AudioPlayer = ({ selectedLanguage }) => {
     } else if (audioRef.current) {
       audioRef.current.pause();
     }
-  }, [isPlaying, chapter]);
+  }, [isPlaying, audioUrl]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -74,7 +92,7 @@ const AudioPlayer = ({ selectedLanguage }) => {
         audio.removeEventListener("ended", handleEnded);
       };
     }
-  }, [chapter]);
+  }, [audioUrl]);
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -98,19 +116,19 @@ const AudioPlayer = ({ selectedLanguage }) => {
     setCurrentTime(newTime);
   };
 
-  if (!chapter) {
+  if (!audioUrl) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="audio-player">
       <img
-        src={chapter.image_url}
-        alt={chapter.title}
+        src={chapter?.image_url}
+        alt={chapter?.title}
         className="chapter-image-audio-player"
       />
       <h2>
-        <center>{chapter.title}</center>
+        <center>{chapter?.title}</center>
       </h2>
       <audio ref={audioRef} />
       <div className="controls">

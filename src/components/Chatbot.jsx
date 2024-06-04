@@ -17,7 +17,7 @@ const Chatbot = () => {
     const enhancedMessage =
       input +
       "\n" +
-      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me?";
+      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Please give response in paragraph form.";
 
     // Define the request payload
     const payload = {

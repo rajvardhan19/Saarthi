@@ -33,7 +33,6 @@ const Sidebar = ({ setActiveClassName }) => {
         >
           Audiobook
         </NavLink>
-        <div className="sidebar-item">Shlok of the day</div>
         <div className="sidebar-item">Aartis</div>
         <div className="sidebar-item">Mythology Stories</div>
       </div>
