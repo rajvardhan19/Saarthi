@@ -1,7 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Sidebar = ({ setActiveClassName }) => {
+const Sidebar = ({ onProtectedAction, session }) => {
+  const handleProtectedClick = (event) => {
+    if (!onProtectedAction()) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -13,7 +19,6 @@ const Sidebar = ({ setActiveClassName }) => {
           to="/read-chapters"
           className="sidebar-item"
           activeClassName="active"
-          onClick={() => setActiveClassName("read-chapters")}
         >
           Read Chapters
         </NavLink>
@@ -21,7 +26,7 @@ const Sidebar = ({ setActiveClassName }) => {
           to="/chatbot"
           className="sidebar-item"
           activeClassName="active"
-          onClick={() => setActiveClassName("chatbot")}
+          onClick={handleProtectedClick}
         >
           Saarthi Chatbot
         </NavLink>
@@ -29,12 +34,18 @@ const Sidebar = ({ setActiveClassName }) => {
           to="/audiobook"
           className="sidebar-item"
           activeClassName="active"
-          onClick={() => setActiveClassName("audiobook")}
         >
           Audiobook
         </NavLink>
         <div className="sidebar-item">Aartis</div>
-        <div className="sidebar-item">Mythology Stories</div>
+        <NavLink
+          to="/liked"
+          className="sidebar-item"
+          activeClassName="active"
+          onClick={handleProtectedClick}
+        >
+          Liked
+        </NavLink>
       </div>
     </div>
   );

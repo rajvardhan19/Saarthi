@@ -571,3 +571,18 @@ body {
   cursor: pointer;
   font-size: 20px;
 }
+.auth-modal .phone-input {
+  display: flex;
+  align-items: center;
+}
+
+.auth-modal .phone-input span {
+  margin-right: 5px;
+  font-size: 1.2em;
+}
+
+.auth-modal .phone-input input {
+  flex: 1;
+  padding: 5px;
+  font-size: 1em;
+}

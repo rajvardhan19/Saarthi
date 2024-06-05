@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FaPlay, FaPause, FaStepForward, FaStepBackward } from "react-icons/fa";
 import supabase from "./supabaseClient";
 
-const AudioPlayer = ({ selectedLanguage }) => {
+const AudioPlayer = ({ selectedLanguage, userId }) => {
   const { chapterId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,6 +65,53 @@ const AudioPlayer = ({ selectedLanguage }) => {
       audioRef.current.pause();
     }
   }, [isPlaying, audioUrl]);
+
+  useEffect(() => {
+    const markAsHeard = async (userId, chapterId) => {
+      try {
+        const { data: recentHeardData, error: recentHeardError } =
+          await supabase
+            .from("recently_heard")
+            .select("*")
+            .eq("user_id", userId)
+            .order("last_heard", { ascending: false })
+            .limit(1);
+
+        if (recentHeardError) {
+          console.error("Error checking recently heard:", recentHeardError);
+          return;
+        }
+
+        if (
+          recentHeardData.length > 0 &&
+          recentHeardData[0].chapter_id === chapterId
+        ) {
+          return;
+        }
+
+        const { data, error } = await supabase
+          .from("recently_heard")
+          .insert([{ user_id: userId, chapter_id: chapterId }], {
+            onConflict: ["user_id", "chapter_id"],
+          });
+
+        if (error) {
+          if (error.code === "23505") {
+            // Unique constraint violation error
+            console.log("Chapter already marked as heard.");
+          } else {
+            console.error("Error marking as heard:", error);
+          }
+        }
+      } catch (error) {
+        console.error("Error marking as heard:", error);
+      }
+    };
+
+    if (userId && chapterId) {
+      markAsHeard(userId, chapterId);
+    }
+  }, [userId, chapterId]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -130,36 +177,23 @@ const AudioPlayer = ({ selectedLanguage }) => {
       <h2>
         <center>{chapter?.title}</center>
       </h2>
-      <audio ref={audioRef} />
-      <div className="controls">
-        <button onClick={handlePrevious}>
-          <FaStepBackward size={30} />
-        </button>
-        <button onClick={handlePlayPause}>
-          {isPlaying ? <FaPause size={30} /> : <FaPlay size={30} />}
-        </button>
-        <button onClick={handleNext}>
-          <FaStepForward size={30} />
-        </button>
-      </div>
+      <audio ref={audioRef}></audio>
+      <button onClick={handlePrevious}>
+        <FaStepBackward />
+      </button>
+      <button onClick={handlePlayPause}>
+        {isPlaying ? <FaPause /> : <FaPlay />}
+      </button>
+      <button onClick={handleNext}>
+        <FaStepForward />
+      </button>
       <input
         type="range"
         min="0"
         max="100"
         value={(currentTime / duration) * 100}
         onChange={handleSeek}
-        className="seekbar"
       />
-      <div className="time">
-        <span className="current-time">
-          {Math.floor(currentTime / 60)}:
-          {("0" + Math.floor(currentTime % 60)).slice(-2)}
-        </span>
-        <span className="total-time">
-          {Math.floor(duration / 60)}:
-          {("0" + Math.floor(duration % 60)).slice(-2)}
-        </span>
-      </div>
     </div>
   );
 };

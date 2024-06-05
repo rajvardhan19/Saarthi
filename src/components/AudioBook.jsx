@@ -4,9 +4,11 @@ import RecentlyHeard from "./RecentlyHeard";
 import RecentlyHeardLeft from "./RecentlyHeardLeft";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
 
-const AudioBook = ({ selectedLanguage }) => {
+const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
   const [chapters, setChapters] = useState([]);
   const [viewAll, setViewAll] = useState(false);
+  const [likedChapters, setLikedChapters] = useState([]);
+  const [recentlyHeard, setRecentlyHeard] = useState([]);
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -14,13 +16,45 @@ const AudioBook = ({ selectedLanguage }) => {
       if (error) {
         console.error("Error fetching chapters:", error);
       } else {
-        console.log("Fetched chapters:", data);
         setChapters(data);
       }
     };
 
+    const fetchLikedChapters = async () => {
+      if (!onProtectedAction()) return;
+
+      const { data, error } = await supabase
+        .from("liked_chapters")
+        .select("chapter_id, type")
+        .eq("user_id", userId)
+        .eq("type", "audiobook");
+
+      if (error) {
+        console.error("Error fetching liked audiobook chapters:", error);
+      } else {
+        setLikedChapters(data.map((item) => item.chapter_id));
+      }
+    };
+
+    const fetchRecentlyHeard = async () => {
+      const { data, error } = await supabase
+        .from("recently_heard")
+        .select("*")
+        .eq("user_id", userId)
+        .order("last_heard", { ascending: false })
+        .limit(5);
+
+      if (error) {
+        console.error("Error fetching recently heard chapters:", error);
+      } else {
+        setRecentlyHeard(data);
+      }
+    };
+
     fetchChapters();
-  }, []);
+    fetchLikedChapters();
+    fetchRecentlyHeard();
+  }, [onProtectedAction, userId]);
 
   const visibleChapters = viewAll ? chapters : chapters.slice(0, 6);
 
@@ -44,6 +78,9 @@ const AudioBook = ({ selectedLanguage }) => {
                 imageSrc={chapter.image_url}
                 chapterId={chapter.id}
                 selectedLanguage={selectedLanguage}
+                userId={userId}
+                initialIsLiked={likedChapters.includes(chapter.id)}
+                onProtectedAction={onProtectedAction}
               />
             ))
           )}
@@ -56,37 +93,13 @@ const AudioBook = ({ selectedLanguage }) => {
             <button>View all</button>
           </div>
           <div className="recently-heard-list">
-            <div className="recently-heard-left">
-              <RecentlyHeardLeft
-                title="Shlok 4"
-                chapter="Chapter 3"
-                imageSrc="chapter3.jpeg"
-              />
-            </div>
-            <div className="recently-heard-right">
+            {recentlyHeard.map((heard) => (
               <RecentlyHeard
-                title="Shlok 17"
-                chapter="Chapter 12"
-                imageSrc="chapter2.jpeg"
+                key={heard.id}
+                title={`Chapter ${heard.chapter_id}`}
+                imageSrc={`chapter${heard.chapter_id}.jpeg`}
               />
-              <RecentlyHeard
-                title="Shlok 18"
-                chapter="Chapter 13"
-                imageSrc="chapter3.jpeg"
-              />
-            </div>
-            <div className="recently-heard-right">
-              <RecentlyHeard
-                title="Shlok 17"
-                chapter="Chapter 12"
-                imageSrc="chapter2.jpeg"
-              />
-              <RecentlyHeard
-                title="Shlok 18"
-                chapter="Chapter 13"
-                imageSrc="chapter3.jpeg"
-              />
-            </div>
+            ))}
           </div>
         </div>
       )}
