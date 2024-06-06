@@ -14,26 +14,6 @@ import AuthModal from "./components/AuthModal";
 import supabase from "./components/supabaseClient";
 import "./App.css";
 
-const markAsRead = async (userId, chapterId) => {
-  const { error } = await supabase
-    .from("recently_read")
-    .insert([{ user_id: userId, chapter_id: chapterId }]);
-
-  if (error) {
-    console.error("Error marking as read:", error);
-  }
-};
-
-const markAsHeard = async (userId, chapterId) => {
-  const { error } = await supabase
-    .from("recently_heard")
-    .insert([{ user_id: userId, chapter_id: chapterId }]);
-
-  if (error) {
-    console.error("Error marking as heard:", error);
-  }
-};
-
 const App = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("english");
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -113,7 +93,6 @@ const App = () => {
                   selectedLanguage={selectedLanguage}
                   onProtectedAction={handleProtectedAction}
                   userId={session?.user?.id}
-                  markAsRead={markAsRead}
                 />
               }
             />
@@ -136,7 +115,6 @@ const App = () => {
                   selectedLanguage={selectedLanguage}
                   onProtectedAction={handleProtectedAction}
                   userId={session?.user?.id}
-                  markAsHeard={markAsHeard}
                 />
               }
             />
