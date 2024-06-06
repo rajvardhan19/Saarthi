@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FaPlay, FaPause, FaStepForward, FaStepBackward } from "react-icons/fa";
 import supabase from "./supabaseClient";
 
-const AudioPlayer = ({ selectedLanguage }) => {
+const AudioPlayer = ({ selectedLanguage, userId }) => {
   const { chapterId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,6 +13,7 @@ const AudioPlayer = ({ selectedLanguage }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [audioUrl, setAudioUrl] = useState(null);
+  const [isMarkedAsHeard, setIsMarkedAsHeard] = useState(false);
 
   useEffect(() => {
     const fetchChapter = async () => {
@@ -22,7 +23,7 @@ const AudioPlayer = ({ selectedLanguage }) => {
         .eq("id", chapterId)
         .single();
       if (error) {
-        console.error(error);
+        console.error("Error fetching chapter:", error);
       } else {
         setChapter(data);
       }
@@ -118,6 +119,73 @@ const AudioPlayer = ({ selectedLanguage }) => {
     audioRef.current.currentTime = newTime;
     setCurrentTime(newTime);
   };
+
+  useEffect(() => {
+    const markAsHeard = async (userId, chapterId) => {
+      try {
+        console.log(`Marking chapter ${chapterId} as heard for user ${userId}`);
+
+        // Check if the entry already exists
+        const { data: existingEntries, error: fetchError } = await supabase
+          .from("recently_heard")
+          .select("*")
+          .eq("user_id", userId)
+          .order("last_heard", { ascending: false })
+          .limit(1);
+
+        if (fetchError) {
+          console.error("Error fetching existing entries:", fetchError);
+          return;
+        }
+
+        if (existingEntries.length > 0) {
+          const lastEntry = existingEntries[0];
+          if (lastEntry.chapter_id === parseInt(chapterId)) {
+            console.log(
+              "Current entry is the same as the previous one. No update needed."
+            );
+            return;
+          }
+
+          // Delete the existing entry
+          const { error: deleteError } = await supabase
+            .from("recently_heard")
+            .delete()
+            .eq("user_id", userId)
+            .eq("chapter_id", lastEntry.chapter_id);
+
+          if (deleteError) {
+            console.error("Error deleting existing entry:", deleteError);
+            return;
+          }
+        }
+
+        // Insert the new entry with timestamp
+        const { data: newData, error: insertError } = await supabase
+          .from("recently_heard")
+          .insert([
+            {
+              user_id: userId,
+              chapter_id: chapterId,
+              last_heard: new Date().toISOString(), // current timestamp
+            },
+          ]);
+
+        if (insertError) {
+          console.error("Error inserting new entry:", insertError);
+        } else {
+          console.log("Successfully marked as heard:", newData);
+          setIsMarkedAsHeard(true); // Update state after successful marking
+        }
+      } catch (error) {
+        console.error("Error marking as heard:", error);
+      }
+    };
+
+    if (userId && chapterId && !isMarkedAsHeard) {
+      markAsHeard(userId, chapterId);
+    }
+  }, [userId, chapterId, isMarkedAsHeard]);
 
   if (!audioUrl) {
     return <div>Loading...</div>;

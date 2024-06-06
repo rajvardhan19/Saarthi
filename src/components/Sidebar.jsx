@@ -37,7 +37,9 @@ const Sidebar = ({ onProtectedAction, session }) => {
         >
           Audiobook
         </NavLink>
-        <div className="sidebar-item">Aartis</div>
+        <NavLink to="/aartis" className="sidebar-item" activeClassName="active">
+          Aartis
+        </NavLink>
         <NavLink
           to="/liked"
           className="sidebar-item"

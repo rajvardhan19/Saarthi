@@ -140,11 +140,28 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
+.aarti-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 310px;
+  height: 212px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 15px;
+}
 
 .chapter-image-audiobook {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.aarti-image {
+  width: 100%;
+  height: 85%;
+  object-fit: fill;
 }
 
 .chapter-details-audiobook {
@@ -160,6 +177,11 @@ body {
   font-weight: bold;
   margin: 5px;
 }
+.aarti-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 5px;
+}
 
 .chapter-controls-audiobook {
   display: flex;
@@ -167,6 +189,14 @@ body {
 }
 
 .chapter-controls-audiobook span {
+  cursor: pointer;
+}
+.aarti-controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aarti-controls span {
   cursor: pointer;
 }
 
@@ -303,6 +333,11 @@ body {
   flex: 1;
   overflow-y: auto;
 }
+.main-content-aarti {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+}
 
 .section-header {
   display: flex;
@@ -356,6 +391,11 @@ body {
 .chapter-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 columns */
+  gap: 20px;
+}
+.aarti-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 6 columns */
   gap: 20px;
 }
 .chapter-list-audiobook {
@@ -464,6 +504,13 @@ body {
   gap: 20px;
 }
 .chapter-image-audio-player {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 25px;
+  height: 70%;
+  object-fit: cover;
+}
+.aarti-image-audio-player {
   width: 90%;
   margin-left: 5%;
   margin-top: 25px;

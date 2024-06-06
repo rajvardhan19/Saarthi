@@ -12,6 +12,8 @@ import SearchPageAudiobook from "./components/SearchPageAudiobook";
 import Liked from "./components/Liked";
 import AuthModal from "./components/AuthModal";
 import supabase from "./components/supabaseClient";
+import Aarti from "./components/Aarti";
+import AartiPlayer from "./components/AartiPlayer"; // Add this import
 import "./App.css";
 
 const App = () => {
@@ -135,6 +137,14 @@ const App = () => {
                   userId={session?.user?.id}
                 />
               }
+            />
+            <Route
+              path="/aartis"
+              element={<Aarti userId={session?.user?.id} />}
+            />
+            <Route
+              path="/aarti/:aartiId"
+              element={<AartiPlayer userId={session?.user?.id} />}
             />
           </Routes>
         </div>
