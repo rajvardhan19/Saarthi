@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import RecentlyRead from "./RecentlyRead";
-import RecentlyReadLeft from "./RecentlyReadLeft";
 
 const MainContent = ({ onProtectedAction, userId }) => {
   const [chapters, setChapters] = useState([]);
@@ -13,11 +12,14 @@ const MainContent = ({ onProtectedAction, userId }) => {
 
   useEffect(() => {
     const fetchChapters = async () => {
-      const { data, error } = await supabase.from("chapters").select("*");
-      if (error) {
-        console.error("Error fetching chapters:", error);
+      const { data: chaptersData, error: chaptersError } = await supabase
+        .from("chapters")
+        .select("*");
+
+      if (chaptersError) {
+        console.error("Error fetching chapters:", chaptersError);
       } else {
-        setChapters(data);
+        setChapters(chaptersData);
 
         const { data: likes, error: likesError } = await supabase
           .from("liked_chapters")
@@ -36,7 +38,7 @@ const MainContent = ({ onProtectedAction, userId }) => {
 
         const { data: recentReads, error: recentReadsError } = await supabase
           .from("recently_read")
-          .select("*")
+          .select("chapter_id, last_read")
           .eq("user_id", userId)
           .order("last_read", { ascending: false })
           .limit(5);
@@ -100,7 +102,7 @@ const MainContent = ({ onProtectedAction, userId }) => {
           <div className="recently-read-list">
             {recentlyRead.map((read) => (
               <RecentlyRead
-                key={read.id}
+                key={read.chapter_id}
                 title={`Chapter ${read.chapter_id}`}
                 imageSrc={`chapter${read.chapter_id}.jpeg`}
               />
