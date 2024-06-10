@@ -47,7 +47,7 @@ const Liked = ({ onProtectedAction, userId }) => {
   }
 
   return (
-    <div>
+    <div className="liked-container">
       <h2>Liked Chapters</h2>
       {likedChapters.length > 0 ? (
         <div className="chapter-list">

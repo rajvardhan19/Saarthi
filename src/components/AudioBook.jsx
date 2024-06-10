@@ -90,7 +90,6 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
         <div className="recently-heard-section">
           <div className="section-header-audiobook">
             <h2>Recently Heard</h2>
-            <button>View all</button>
           </div>
           <div className="recently-heard-list">
             {recentlyHeard.map((heard) => (

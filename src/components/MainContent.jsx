@@ -97,7 +97,6 @@ const MainContent = ({ onProtectedAction, userId }) => {
         <div className="recently-read-section">
           <div className="section-header">
             <h2>Recently Read</h2>
-            <button onClick={handleViewAllClick}>View all</button>
           </div>
           <div className="recently-read-list">
             {recentlyRead.map((read) => (
