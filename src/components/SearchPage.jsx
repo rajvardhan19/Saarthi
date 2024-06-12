@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import supabase from "./supabaseClient";
 import { useNavigate } from "react-router-dom";
 
-const SearchPage = () => {
+const SearchPage = ({ selectedLanguage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
@@ -36,6 +36,21 @@ const SearchPage = () => {
     navigate(`/chapter/${chapterId}`);
   };
 
+  const getImageUrl = (chapterId) => {
+    const language = selectedLanguage === "english" ? "" : selectedLanguage;
+    const filename = `${language}chapter${chapterId}.png`;
+
+    const { data, error } = supabase.storage
+      .from("images")
+      .getPublicUrl(filename);
+
+    if (error) {
+      console.error(`Error fetching image URL for ${filename}:`, error);
+    }
+
+    return data ? data.publicUrl : "";
+  };
+
   return (
     <div className="search-page">
       <input
@@ -53,7 +68,7 @@ const SearchPage = () => {
             onClick={() => handleResultClick(result.id)}
           >
             <img
-              src={result.image_url}
+              src={getImageUrl(result.id)}
               alt={result.title}
               className="search-result-image"
             />

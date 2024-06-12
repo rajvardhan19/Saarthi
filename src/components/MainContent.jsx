@@ -3,12 +3,13 @@ import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import RecentlyRead from "./RecentlyRead";
 
-const MainContent = ({ onProtectedAction, userId }) => {
+const MainContent = ({ onProtectedAction, userId, selectedLanguage }) => {
   const [chapters, setChapters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewAll, setViewAll] = useState(false);
   const [likedChapters, setLikedChapters] = useState({});
   const [recentlyRead, setRecentlyRead] = useState([]);
+  const [chapterImages, setChapterImages] = useState({});
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -58,6 +59,33 @@ const MainContent = ({ onProtectedAction, userId }) => {
     fetchChapters();
   }, [userId]);
 
+  useEffect(() => {
+    const fetchChapterImages = async () => {
+      const newChapterImages = {};
+
+      for (const chapter of chapters) {
+        const language = selectedLanguage === "english" ? "" : selectedLanguage;
+        const filename = `${language}chapter${chapter.id}.png`;
+
+        const { data, error } = await supabase.storage
+          .from("images")
+          .getPublicUrl(filename);
+
+        if (error) {
+          console.error(`Error fetching image URL for ${filename}:`, error);
+        } else {
+          newChapterImages[chapter.id] = data.publicUrl;
+        }
+      }
+
+      setChapterImages(newChapterImages);
+    };
+
+    if (chapters.length > 0) {
+      fetchChapterImages();
+    }
+  }, [chapters, selectedLanguage]);
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -83,7 +111,7 @@ const MainContent = ({ onProtectedAction, userId }) => {
               <ChapterCard
                 key={chapter.id}
                 title={chapter.title}
-                imageSrc={chapter.image_url}
+                imageSrc={chapterImages[chapter.id]}
                 chapterId={chapter.id}
                 userId={userId}
                 initialIsLiked={likedChapters[chapter.id]}
@@ -103,7 +131,7 @@ const MainContent = ({ onProtectedAction, userId }) => {
               <RecentlyRead
                 key={read.chapter_id}
                 title={`Chapter ${read.chapter_id}`}
-                imageSrc={`chapter${read.chapter_id}.jpeg`}
+                imageSrc={chapterImages[read.chapter_id]}
               />
             ))}
           </div>

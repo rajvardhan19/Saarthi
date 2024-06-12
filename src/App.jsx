@@ -13,7 +13,8 @@ import Liked from "./components/Liked";
 import AuthModal from "./components/AuthModal";
 import supabase from "./components/supabaseClient";
 import Aarti from "./components/Aarti";
-import AartiPlayer from "./components/AartiPlayer"; // Add this import
+import AartiPlayer from "./components/AartiPlayer";
+import Homepage from "./components/Homepage"; // Import the Homepage component
 import "./App.css";
 
 const App = () => {
@@ -73,9 +74,10 @@ const App = () => {
             <Route
               path="/"
               element={
-                <MainContent
+                <Homepage
                   onProtectedAction={handleProtectedAction}
                   userId={session?.user?.id}
+                  selectedLanguage={selectedLanguage}
                 />
               }
             />
@@ -85,6 +87,7 @@ const App = () => {
                 <MainContent
                   onProtectedAction={handleProtectedAction}
                   userId={session?.user?.id}
+                  selectedLanguage={selectedLanguage}
                 />
               }
             />
@@ -98,7 +101,10 @@ const App = () => {
                 />
               }
             />
-            <Route path="/search" element={<SearchPage />} />
+            <Route
+              path="/search"
+              element={<SearchPage selectedLanguage={selectedLanguage} />}
+            />
             <Route path="/chatbot" element={<Chatbot />} />
             <Route
               path="/audiobook"
@@ -123,10 +129,7 @@ const App = () => {
             <Route
               path="/search-audiobook"
               element={
-                <SearchPageAudiobook
-                  selectedLanguage={selectedLanguage}
-                  onProtectedAction={handleProtectedAction}
-                />
+                <SearchPageAudiobook selectedLanguage={selectedLanguage} />
               }
             />
             <Route
@@ -135,6 +138,7 @@ const App = () => {
                 <Liked
                   onProtectedAction={handleProtectedAction}
                   userId={session?.user?.id}
+                  selectedLanguage={selectedLanguage}
                 />
               }
             />

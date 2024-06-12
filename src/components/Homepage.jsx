@@ -3,53 +3,48 @@ import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
 
-const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
-  const [likedChapters, setLikedChapters] = useState([]);
-  const [likedAudiobookChapters, setLikedAudiobookChapters] = useState([]);
+const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
+  const [chapters, setChapters] = useState([]);
+  const [audiobookChapters, setAudiobookChapters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [chapterImages, setChapterImages] = useState({});
   const [audiobookChapterImages, setAudiobookChapterImages] = useState({});
 
   useEffect(() => {
-    const fetchLikedChapters = async () => {
-      if (!onProtectedAction()) return;
+    const fetchChapters = async () => {
+      const { data: chaptersData, error: chaptersError } = await supabase
+        .from("chapters")
+        .select("*");
 
-      // Fetch liked text chapters
-      const { data: textData, error: textError } = await supabase
-        .from("liked_chapters")
-        .select("chapter_id, chapters(*)")
-        .eq("user_id", userId);
-
-      if (textError) {
-        console.error("Error fetching liked text chapters:", textError);
+      if (chaptersError) {
+        console.error("Error fetching chapters:", chaptersError);
       } else {
-        setLikedChapters(textData.map((item) => item.chapters));
+        setChapters(chaptersData);
       }
-
-      // Fetch liked audiobook chapters
-      const { data: audioData, error: audioError } = await supabase
-        .from("liked_audio_chapters")
-        .select("chapter_id, chapters(*)")
-        .eq("user_id", userId);
-
-      if (audioError) {
-        console.error("Error fetching liked audiobook chapters:", audioError);
-      } else {
-        setLikedAudiobookChapters(audioData.map((item) => item.chapters));
-      }
-
-      setLoading(false);
     };
 
-    fetchLikedChapters();
-  }, [onProtectedAction, userId]);
+    const fetchAudiobookChapters = async () => {
+      const { data: audiobookData, error: audiobookError } = await supabase
+        .from("chapters")
+        .select("*");
+
+      if (audiobookError) {
+        console.error("Error fetching audiobook chapters:", audiobookError);
+      } else {
+        setAudiobookChapters(audiobookData);
+      }
+    };
+
+    fetchChapters();
+    fetchAudiobookChapters();
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     const fetchChapterImages = async () => {
       const newChapterImages = {};
-      const newAudiobookChapterImages = {};
 
-      for (const chapter of likedChapters) {
+      for (const chapter of chapters) {
         const language = selectedLanguage === "english" ? "" : selectedLanguage;
         const filename = `${language}chapter${chapter.id}.png`;
 
@@ -64,7 +59,19 @@ const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
         }
       }
 
-      for (const chapter of likedAudiobookChapters) {
+      setChapterImages(newChapterImages);
+    };
+
+    if (chapters.length > 0) {
+      fetchChapterImages();
+    }
+  }, [chapters, selectedLanguage]);
+
+  useEffect(() => {
+    const fetchAudiobookChapterImages = async () => {
+      const newAudiobookChapterImages = {};
+
+      for (const chapter of audiobookChapters) {
         const language = selectedLanguage === "english" ? "" : selectedLanguage;
         const filename = `${language}chapter${chapter.id}.png`;
 
@@ -79,59 +86,58 @@ const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
         }
       }
 
-      setChapterImages(newChapterImages);
       setAudiobookChapterImages(newAudiobookChapterImages);
     };
 
-    if (likedChapters.length > 0 || likedAudiobookChapters.length > 0) {
-      fetchChapterImages();
+    if (audiobookChapters.length > 0) {
+      fetchAudiobookChapterImages();
     }
-  }, [likedChapters, likedAudiobookChapters, selectedLanguage]);
+  }, [audiobookChapters, selectedLanguage]);
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="liked-container">
-      <h2>Liked Chapters</h2>
-      {likedChapters.length > 0 ? (
+    <div className="homepage-container">
+      <h2>Chapters</h2>
+      {chapters.length > 0 ? (
         <div className="chapter-list">
-          {likedChapters.map((chapter) => (
+          {chapters.map((chapter) => (
             <ChapterCard
               key={chapter.id}
               title={chapter.title}
               imageSrc={chapterImages[chapter.id]}
               chapterId={chapter.id}
               userId={userId}
-              initialIsLiked={true}
+              initialIsLiked={false}
               onProtectedAction={onProtectedAction}
             />
           ))}
         </div>
       ) : (
-        <div>You haven't liked any text chapters yet.</div>
+        <div>No chapters found.</div>
       )}
-      <h2>Liked Audiobook Chapters</h2>
-      {likedAudiobookChapters.length > 0 ? (
+      <h2>Audiobook Chapters</h2>
+      {audiobookChapters.length > 0 ? (
         <div className="chapter-list-audiobook">
-          {likedAudiobookChapters.map((chapter) => (
+          {audiobookChapters.map((chapter) => (
             <ChapterCardAudiobook
               key={chapter.id}
               title={chapter.title}
               imageSrc={audiobookChapterImages[chapter.id]}
               chapterId={chapter.id}
               userId={userId}
-              initialIsLiked={true}
+              initialIsLiked={false}
               onProtectedAction={onProtectedAction}
             />
           ))}
         </div>
       ) : (
-        <div>You haven't liked any audiobook chapters yet.</div>
+        <div>No audiobook chapters found.</div>
       )}
     </div>
   );
 };
 
-export default Liked;
+export default Homepage;

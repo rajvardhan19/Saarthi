@@ -36,6 +36,21 @@ const SearchPageAudiobook = ({ selectedLanguage }) => {
     navigate(`/audio/${chapterId}?language=${selectedLanguage}`);
   };
 
+  const getImageUrl = (chapterId) => {
+    const language = selectedLanguage === "english" ? "" : selectedLanguage;
+    const filename = `${language}chapter${chapterId}.png`;
+
+    const { data, error } = supabase.storage
+      .from("audiobook_images")
+      .getPublicUrl(filename);
+
+    if (error) {
+      console.error(`Error fetching image URL for ${filename}:`, error);
+    }
+
+    return data ? data.publicUrl : "";
+  };
+
   return (
     <div className="search-page">
       <input
@@ -53,7 +68,7 @@ const SearchPageAudiobook = ({ selectedLanguage }) => {
             onClick={() => handleResultClick(result.id)}
           >
             <img
-              src={result.image_url}
+              src={getImageUrl(result.id)}
               alt={result.title}
               className="search-result-image"
             />

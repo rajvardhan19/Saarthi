@@ -13,6 +13,7 @@ const AudioPlayer = ({ selectedLanguage, userId }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [audioUrl, setAudioUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const [isMarkedAsHeard, setIsMarkedAsHeard] = useState(false);
 
   useEffect(() => {
@@ -61,6 +62,31 @@ const AudioPlayer = ({ selectedLanguage, userId }) => {
       audioRef.current.src = audioUrl;
     }
   }, [audioUrl]);
+
+  useEffect(() => {
+    if (chapter) {
+      const fetchImageUrl = async () => {
+        const language =
+          new URLSearchParams(location.search).get("language") ||
+          selectedLanguage;
+        const filename =
+          language === "english"
+            ? `chapter${chapterId}.png`
+            : `${language}chapter${chapterId}.png`;
+
+        const { data, error } = await supabase.storage
+          .from("audiobook_images")
+          .getPublicUrl(filename);
+
+        if (error) {
+          console.error("Error fetching image URL:", error);
+        } else {
+          setImageUrl(data.publicUrl);
+        }
+      };
+      fetchImageUrl();
+    }
+  }, [chapter, chapterId, location.search, selectedLanguage]);
 
   useEffect(() => {
     if (isPlaying && audioRef.current) {
@@ -194,7 +220,7 @@ const AudioPlayer = ({ selectedLanguage, userId }) => {
   return (
     <div className="audio-player">
       <img
-        src={chapter?.image_url}
+        src={imageUrl}
         alt={chapter?.title}
         className="chapter-image-audio-player"
       />

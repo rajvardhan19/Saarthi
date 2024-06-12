@@ -9,6 +9,7 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
   const [viewAll, setViewAll] = useState(false);
   const [likedChapters, setLikedChapters] = useState([]);
   const [recentlyHeard, setRecentlyHeard] = useState([]);
+  const [chapterImages, setChapterImages] = useState({});
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -56,6 +57,33 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
     fetchRecentlyHeard();
   }, [onProtectedAction, userId]);
 
+  useEffect(() => {
+    const fetchChapterImages = async () => {
+      const newChapterImages = {};
+
+      for (const chapter of chapters) {
+        const language = selectedLanguage === "english" ? "" : selectedLanguage;
+        const filename = `${language}chapter${chapter.id}.png`;
+
+        const { data, error } = await supabase.storage
+          .from("audiobook_images")
+          .getPublicUrl(filename);
+
+        if (error) {
+          console.error(`Error fetching image URL for ${filename}:`, error);
+        } else {
+          newChapterImages[chapter.id] = data.publicUrl;
+        }
+      }
+
+      setChapterImages(newChapterImages);
+    };
+
+    if (chapters.length > 0) {
+      fetchChapterImages();
+    }
+  }, [chapters, selectedLanguage]);
+
   const visibleChapters = viewAll ? chapters : chapters.slice(0, 6);
 
   return (
@@ -75,7 +103,7 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
               <ChapterCardAudiobook
                 key={chapter.id}
                 title={chapter.title}
-                imageSrc={chapter.image_url}
+                imageSrc={chapterImages[chapter.id]}
                 chapterId={chapter.id}
                 selectedLanguage={selectedLanguage}
                 userId={userId}
@@ -96,7 +124,7 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
               <RecentlyHeard
                 key={heard.id}
                 title={`Chapter ${heard.chapter_id}`}
-                imageSrc={`chapter${heard.chapter_id}.jpeg`}
+                imageSrc={chapterImages[heard.chapter_id]}
               />
             ))}
           </div>

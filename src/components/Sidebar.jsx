@@ -1,4 +1,5 @@
 import React from "react";
+import { FaReadme } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ onProtectedAction, session }) => {
@@ -12,7 +13,6 @@ const Sidebar = ({ onProtectedAction, session }) => {
     <div className="sidebar">
       <div className="sidebar-header">
         <h1 className="sidebar-title">Saarthi</h1>
-        <hr />
       </div>
       <div className="sidebar-item-container">
         <NavLink
@@ -20,6 +20,8 @@ const Sidebar = ({ onProtectedAction, session }) => {
           className="sidebar-item"
           activeClassName="active"
         >
+          {/* <FaReadme className="sidebar-icon" size={25} /> */}
+          {/* <p className="sidebar-element">Read Chapters</p> */}
           Read Chapters
         </NavLink>
         <NavLink
