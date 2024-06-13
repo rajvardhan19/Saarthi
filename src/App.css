@@ -3,17 +3,28 @@
   font-family: Arial, sans-serif;
   height: 100vh;
 }
-body {
+body,
+html {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden; /* Prevent the body from scrolling */
+}
+
+.homepage-container {
+  padding: 20px;
+  /* This ensures only the homepage content scrolls */
+  height: calc(
+    100vh - 150px
+  ); /* Adjust this value based on your header/footer height */
 }
 
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: #e2e2e2; /* Equivalent to bg-white */
-  border-radius: 0.5rem; /* Equivalent to rounded-lg */
+  background-color: #d4d4d4; /* Equivalent to bg-white */
+
   height: 100%; /* Equivalent to h-full */
   width: 100%; /* Equivalent to w-full */
   overflow: hidden; /* Equivalent to overflow-hidden */
@@ -21,8 +32,9 @@ body {
   height: 100%; /* equivalent to h-full */
   /* equivalent to flex-1 */
   /* equivalent to overflow-y-auto */
-  padding-top: 0.5rem; /* equivalent to py-2 (top padding) */
+  padding-top: 1.2rem; /* equivalent to py-2 (top padding) */
   padding-bottom: 0.5rem; /* equivalent to py-2 (bottom padding) */
+  margin-right: 0;
 }
 .sidebar {
   width: 300px;
@@ -57,7 +69,7 @@ body {
   border-radius: 0.5rem; /* equivalent to rounded-lg */
   width: 100%; /* equivalent to w-full */
   overflow-y: auto; /* equivalent to overflow-y-auto */
-  height: 100%; /* equivalent to h-full */
+  height: 93%; /* equivalent to h-full */
 
   font-weight: 700;
 }
@@ -95,22 +107,11 @@ body {
 .sidebar-item:hover {
   background-color: white;
 }
-
-.sidebar-item.logout {
-  margin-top: auto;
-  background-color: black;
-  color: #fff;
-  font-weight: 700;
-}
-
-.sidebar-item.logout:hover {
-  background-color: #fff;
-  color: #000;
-}
 .main-header {
   height: fit-content;
   background: linear-gradient(to bottom, #b45309, #e2e2e2);
   padding: 1.5rem;
+  border-radius: 0.5rem;
 }
 
 .header {
@@ -254,8 +255,8 @@ body {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  width: 310px;
-  height: 212px;
+  width: 180px;
+  height: 240px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -512,13 +513,15 @@ body {
 }
 .aarti-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 6 columns */
-  gap: 20px;
+  grid-template-columns: repeat(6, 1fr); /* 6 columns */
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .chapter-list-audiobook {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 columns */
   gap: 20px;
+  margin-bottom: 50px;
 }
 .recently-read-section {
   margin-top: 20px;
@@ -699,17 +702,17 @@ body {
   gap: 20px;
 }
 .chapter-image-audio-player {
-  width: 90%;
-  margin-left: 5%;
+  width: 512px;
+  margin-left: 30%;
   margin-top: 25px;
-  height: 70%;
+  height: 512px;
   object-fit: cover;
 }
 .aarti-image-audio-player {
-  width: 90%;
-  margin-left: 5%;
+  width: 512px;
+  margin-left: 30%;
   margin-top: 25px;
-  height: 70%;
+  height: 512px;
   object-fit: cover;
 }
 .time {
