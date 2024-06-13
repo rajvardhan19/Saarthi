@@ -15,41 +15,52 @@ const Sidebar = ({ onProtectedAction, session }) => {
         <h1 className="sidebar-title">Saarthi</h1>
       </div>
       <div className="sidebar-item-container">
-        <NavLink
-          to="/read-chapters"
-          className="sidebar-item"
-          activeClassName="active"
-        >
-          {/* <FaReadme className="sidebar-icon" size={25} /> */}
-          {/* <p className="sidebar-element">Read Chapters</p> */}
-          Read Chapters
-        </NavLink>
-        <NavLink
-          to="/chatbot"
-          className="sidebar-item"
-          activeClassName="active"
-          onClick={handleProtectedClick}
-        >
-          Saarthi Chatbot
-        </NavLink>
-        <NavLink
-          to="/audiobook"
-          className="sidebar-item"
-          activeClassName="active"
-        >
-          Audiobook
-        </NavLink>
-        <NavLink to="/aartis" className="sidebar-item" activeClassName="active">
-          Aartis
-        </NavLink>
-        <NavLink
-          to="/liked"
-          className="sidebar-item"
-          activeClassName="active"
-          onClick={handleProtectedClick}
-        >
-          Liked
-        </NavLink>
+        <div className="sidebar-items">
+          <NavLink to="/" className="sidebar-item" activeClassName="active">
+            Home
+          </NavLink>
+
+          <NavLink
+            to="/read-chapters"
+            className="sidebar-item"
+            activeClassName="active"
+          >
+            {/* <FaReadme className="sidebar-icon" size={25} /> */}
+            {/* <p className="sidebar-element">Read Chapters</p> */}
+            Read Chapters
+          </NavLink>
+
+          <NavLink
+            to="/audiobook"
+            className="sidebar-item"
+            activeClassName="active"
+          >
+            Audiobook
+          </NavLink>
+          <NavLink
+            to="/chatbot"
+            className="sidebar-item"
+            activeClassName="active"
+            onClick={handleProtectedClick}
+          >
+            Saarthi Chatbot
+          </NavLink>
+          <NavLink
+            to="/aartis"
+            className="sidebar-item"
+            activeClassName="active"
+          >
+            Aartis
+          </NavLink>
+          <NavLink
+            to="/liked"
+            className="sidebar-item"
+            activeClassName="active"
+            onClick={handleProtectedClick}
+          >
+            Liked
+          </NavLink>
+        </div>
       </div>
     </div>
   );

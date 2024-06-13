@@ -26,7 +26,7 @@ body {
 }
 .sidebar {
   width: 300px;
-  height: 100%;
+  height: 100vh;
   background-color: #d4d4d4;
   color: black;
   display: flex;
@@ -60,6 +60,13 @@ body {
   height: 100%; /* equivalent to h-full */
 
   font-weight: 700;
+}
+.sidebar-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  margin-top: 15px;
 }
 .sidebar-item {
   cursor: pointer;
@@ -100,30 +107,81 @@ body {
   background-color: #fff;
   color: #000;
 }
+.main-header {
+  height: fit-content;
+  background: linear-gradient(to bottom, #b45309, #e2e2e2);
+  padding: 1.5rem;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+.header-left {
+  flex: 1;
+}
+
 .header-user {
+  display: flex;
+  justify-content: flex-end;
   width: 25%;
   margin-right: 0;
+  position: relative; /* Ensure dropdown positions correctly relative to this div */
 }
-.main-header {
-  height: fit-content;
-  background: linear-gradient(
-    to bottom,
-    #b45309,
-    #e2e2e2
-  ); /* Equivalent to from-yellow-800 */
-  padding: 1.5rem; /* 6 * 0.25rem = 1.5rem */
+
+.profile {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px; /* Adjust this value to position the dropdown correctly */
+  right: 0; /* Position dropdown directly below the profile icon */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu button,
+.dropdown-menu select {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
 }
 
 .header-title {
-  margin: 10px 0px;
+  margin: 10px 0;
   font-size: 24px;
   font-weight: bold;
   color: #000;
+}
+
+.login-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.header-search {
+  width: 280px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
 }
 
 .liked {
@@ -490,40 +548,112 @@ body {
 
 /* ChatBot  */
 .chatbot {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .chatbot-messages {
   flex: 1;
   overflow-y: auto;
   padding: 10px;
+  position: relative; /* Position relative to contain the ripple effect */
+  background-image: url("/chatbotbg.jpg");
+  background-color: #cccccc; /* Used if the image is unavailable */
+  height: 600px; /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.ripple {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0; /* Ensure it stays behind other elements */
+  animation: ripple 4s infinite;
+  pointer-events: none; /* Prevent interactions */
+}
+
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 500%;
+    height: 500%;
+    opacity: 0;
+  }
+}
+
+/* Adjust the z-index for messages and cards to be above the ripple */
+.card,
+.message {
+  position: relative;
+  z-index: 1;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 10px;
+  margin: 10px 0;
+  align-items: center;
+}
+.card {
   background-color: #fff;
+  padding: 10px;
+  margin: 10px 0;
+  height: 120px;
+  width: 10rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card-text {
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 36px;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .message {
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
   border-radius: 5px;
-  max-width: 80%;
 }
 
 .message.user {
-  background-color: #d1e7dd;
+  background-color: #e0f7fa;
   align-self: flex-end;
 }
 
 .message.gemini {
-  background-color: #fff3cd;
+  background-color: #f1f8e9;
   align-self: flex-start;
 }
 
 .chatbot-input {
   display: flex;
+  align-items: center;
   padding: 10px;
-  background-color: #ffffff;
   border-top: 1px solid #ccc;
+  background-color: #e2e2e2;
 }
 
 .chatbot-input input {
@@ -539,11 +669,17 @@ body {
   border: none;
   border-radius: 5px;
   background-color: #007bff;
-  color: #ffffff;
+  color: white;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.chatbot-input button:hover {
+.chatbot-input button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.chatbot-input button:hover:not(:disabled) {
   background-color: #0056b3;
 }
 

@@ -1,28 +1,35 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Model from "./Model";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import { useSpeechSynthesis } from "react-speech-kit";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
+  const [rippleActive, setRippleActive] = useState(false);
+  const [showCards, setShowCards] = useState(true);
   const { speak } = useSpeechSynthesis();
 
-  const handleSendMessage = async () => {
-    if (input.trim() === "") return;
+  const handleSendMessage = async (messageText) => {
+    const text = messageText || input;
+    if (text.trim() === "") return;
 
     // Add the user's message to the message list
-    const userMessage = { sender: "user", text: input };
-    setMessages([...messages, userMessage]);
+    const userMessage = { sender: "user", text: text };
+    setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+    // Trigger ripple effect
+    setRippleActive(true);
+    setTimeout(() => setRippleActive(false), 4000); // Adjust timing to match animation duration
+
+    // Hide the card container
+    setShowCards(false);
 
     // Prepare the message to be sent to Gemini
     const enhancedMessage =
-      input +
+      text +
       "\n" +
-      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Please give response in paragraph form.";
+      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Also discuss some strategy to navigate through this problem. Please give response in paragraph form.";
 
     // Define the request payload
     const payload = {
@@ -75,17 +82,35 @@ const Chatbot = () => {
     setInput("");
   };
 
+  const handleCardClick = (text) => {
+    setInput(text);
+    handleSendMessage(text);
+  };
+
+  const cardData = [
+    "How can I find inner peace?",
+    "What is the path to success?",
+    "How to deal with failure?",
+    "How can I develop resilience?",
+  ];
+
   return (
     <div className="chatbot">
+      {rippleActive && <div className="ripple"></div>}
       <div className="chatbot-messages">
-        <div style={{ width: "20vw", height: "50vh" }}>
-          <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
-            <ambientLight intensity={2} />
-            <directionalLight position={[0, 5, 5]} />
-            <Model path="/Krishna.glb" />
-            <OrbitControls minDistance={9} maxDistance={9} enableZoom={false} />
-          </Canvas>
-        </div>
+        {showCards && (
+          <div className="card-container">
+            {cardData.map((cardText, index) => (
+              <div
+                key={index}
+                className="card"
+                onClick={() => handleCardClick(cardText)}
+              >
+                <p className="card-text">{cardText}</p>
+              </div>
+            ))}
+          </div>
+        )}
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.sender}`}>
             {message.text}
@@ -100,7 +125,7 @@ const Chatbot = () => {
           onChange={(e) => setInput(e.target.value)}
           disabled={generatingAnswer}
         />
-        <button onClick={handleSendMessage} disabled={generatingAnswer}>
+        <button onClick={() => handleSendMessage()} disabled={generatingAnswer}>
           {generatingAnswer ? "Sending..." : "Send"}
         </button>
       </div>
