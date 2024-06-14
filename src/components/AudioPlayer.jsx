@@ -151,34 +151,26 @@ const AudioPlayer = ({ selectedLanguage, userId }) => {
       try {
         console.log(`Marking chapter ${chapterId} as heard for user ${userId}`);
 
-        // Check if the entry already exists
+        // Check if the entry with the same chapter_id and user_id already exists
         const { data: existingEntries, error: fetchError } = await supabase
           .from("recently_heard")
           .select("*")
           .eq("user_id", userId)
-          .order("last_heard", { ascending: false })
-          .limit(1);
+          .eq("chapter_id", chapterId)
+          .single();
 
-        if (fetchError) {
-          console.error("Error fetching existing entries:", fetchError);
+        if (fetchError && fetchError.code !== "PGRST116") {
+          console.error("Error fetching existing entry:", fetchError);
           return;
         }
 
-        if (existingEntries.length > 0) {
-          const lastEntry = existingEntries[0];
-          if (lastEntry.chapter_id === parseInt(chapterId)) {
-            console.log(
-              "Current entry is the same as the previous one. No update needed."
-            );
-            return;
-          }
-
-          // Delete the existing entry
+        // If it exists, delete the existing entry
+        if (existingEntries) {
           const { error: deleteError } = await supabase
             .from("recently_heard")
             .delete()
             .eq("user_id", userId)
-            .eq("chapter_id", lastEntry.chapter_id);
+            .eq("chapter_id", chapterId);
 
           if (deleteError) {
             console.error("Error deleting existing entry:", deleteError);

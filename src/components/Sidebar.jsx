@@ -1,8 +1,19 @@
 import React from "react";
 import { FaReadme } from "react-icons/fa";
+import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
+import {
+  IoChatboxEllipses,
+  IoChatboxEllipsesOutline,
+  IoHome,
+  IoHomeOutline,
+  IoReader,
+  IoReaderOutline,
+} from "react-icons/io5";
+import { MdAudiotrack, MdOutlineAudiotrack } from "react-icons/md";
+import { PiHandsPraying, PiHandsPrayingBold } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 
-const Sidebar = ({ onProtectedAction, session }) => {
+const Sidebar = ({ onProtectedAction }) => {
   const handleProtectedClick = (event) => {
     if (!onProtectedAction()) {
       event.preventDefault();
@@ -16,7 +27,14 @@ const Sidebar = ({ onProtectedAction, session }) => {
       </div>
       <div className="sidebar-item-container">
         <div className="sidebar-items">
-          <NavLink to="/" className="sidebar-item" activeClassName="active">
+          <NavLink
+            exact
+            to="/"
+            className="sidebar-item"
+            activeClassName="active"
+          >
+            <IoHomeOutline className="sidebar-icon default" />
+            <IoHome className="sidebar-icon active-icon" />
             Home
           </NavLink>
 
@@ -25,8 +43,8 @@ const Sidebar = ({ onProtectedAction, session }) => {
             className="sidebar-item"
             activeClassName="active"
           >
-            {/* <FaReadme className="sidebar-icon" size={25} /> */}
-            {/* <p className="sidebar-element">Read Chapters</p> */}
+            <IoReaderOutline className="sidebar-icon default" />
+            <IoReader className="sidebar-icon active-icon" />
             Read Chapters
           </NavLink>
 
@@ -35,6 +53,8 @@ const Sidebar = ({ onProtectedAction, session }) => {
             className="sidebar-item"
             activeClassName="active"
           >
+            <MdOutlineAudiotrack className="sidebar-icon default" />
+            <MdAudiotrack className="sidebar-icon active-icon" />
             Audiobook
           </NavLink>
           <NavLink
@@ -43,6 +63,8 @@ const Sidebar = ({ onProtectedAction, session }) => {
             activeClassName="active"
             onClick={handleProtectedClick}
           >
+            <IoChatboxEllipsesOutline className="sidebar-icon default" />
+            <IoChatboxEllipses className="sidebar-icon active-icon" />
             Saarthi Chatbot
           </NavLink>
           <NavLink
@@ -50,6 +72,8 @@ const Sidebar = ({ onProtectedAction, session }) => {
             className="sidebar-item"
             activeClassName="active"
           >
+            <PiHandsPraying className="sidebar-icon default" />
+            <PiHandsPrayingBold className="sidebar-icon active-icon" />
             Aartis
           </NavLink>
           <NavLink
@@ -58,6 +82,8 @@ const Sidebar = ({ onProtectedAction, session }) => {
             activeClassName="active"
             onClick={handleProtectedClick}
           >
+            <IoIosHeartEmpty className="sidebar-icon default" />
+            <IoIosHeart className="sidebar-icon active-icon" />
             Liked
           </NavLink>
         </div>

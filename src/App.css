@@ -37,8 +37,8 @@ html {
   margin-right: 0;
 }
 .sidebar {
-  width: 300px;
-  height: 100vh;
+  width: 260px;
+  height: auto;
   background-color: #d4d4d4;
   color: black;
   display: flex;
@@ -107,11 +107,34 @@ html {
 .sidebar-item:hover {
   background-color: white;
 }
+.sidebar-item {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-icon {
+  font-size: 1.5em;
+  margin-right: 10px;
+  display: none;
+}
+
+.sidebar-icon.default {
+  display: inline;
+}
+
+.sidebar-item.active .default {
+  display: none;
+}
+
+.sidebar-item.active .active-icon {
+  display: inline;
+}
 .main-header {
   height: fit-content;
-  background: linear-gradient(to bottom, #b45309, #e2e2e2);
+  background: linear-gradient(to bottom, #b45309, #d4d4d4);
   padding: 1.5rem;
   border-radius: 0.5rem;
+  margin-right: 15px;
 }
 
 .header {
@@ -201,7 +224,7 @@ html {
 }
 
 .chapter-card {
-  background: #fff;
+  background: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
   width: 180px;
@@ -241,7 +264,7 @@ html {
   cursor: pointer;
 }
 .chapter-card-audiobook {
-  background: #fff;
+  background: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
   width: 180px;
@@ -306,7 +329,19 @@ html {
   display: flex;
   justify-content: space-between;
 }
-
+.section-header-aarti button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.section-header-aarti {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .aarti-controls span {
   cursor: pointer;
 }
@@ -316,6 +351,9 @@ html {
 }
 
 .favorite {
+  margin: 5px;
+}
+.favorite-audiobook {
   margin: 5px;
 }
 /* RECENTLY READ */
@@ -328,7 +366,7 @@ html {
   margin-left: 25px;
 }
 .recently-read-card {
-  background: #fff;
+  background: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
@@ -383,7 +421,7 @@ html {
   object-fit: cover;
 }
 .recently-heard-card {
-  background: #fff;
+  background: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
@@ -511,6 +549,12 @@ html {
   grid-template-columns: repeat(6, 1fr); /* 6 columns */
   gap: 20px;
 }
+.chapter-list-homepage {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 columns */
+  gap: 20px;
+  margin-bottom: 25px;
+}
 .aarti-list {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 columns */
@@ -553,6 +597,7 @@ html {
 .chatbot {
   position: relative;
   overflow: hidden;
+  margin-right: 15px;
 }
 
 .chatbot-messages {
@@ -562,7 +607,7 @@ html {
   position: relative; /* Position relative to contain the ripple effect */
   background-image: url("/chatbotbg.jpg");
   background-color: #cccccc; /* Used if the image is unavailable */
-  height: 600px; /* You must set a specified height */
+  height: 35rem; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -611,7 +656,7 @@ html {
   align-items: center;
 }
 .card {
-  background-color: #fff;
+  background-color: #f0f0f0;
   padding: 10px;
   margin: 10px 0;
   height: 120px;
@@ -656,7 +701,8 @@ html {
   align-items: center;
   padding: 10px;
   border-top: 1px solid #ccc;
-  background-color: #e2e2e2;
+  background-color: #d4d4d4;
+  border-radius: 0.5rem;
 }
 
 .chatbot-input input {

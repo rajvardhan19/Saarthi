@@ -9,6 +9,9 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
   const [loading, setLoading] = useState(true);
   const [chapterImages, setChapterImages] = useState({});
   const [audiobookChapterImages, setAudiobookChapterImages] = useState({});
+  const [viewAllChapters, setViewAllChapters] = useState(false);
+  const [viewAllAudiobookChapters, setViewAllAudiobookChapters] =
+    useState(false);
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -98,12 +101,24 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
     return <div>Loading...</div>;
   }
 
+  const visibleChapters = viewAllChapters ? chapters : chapters.slice(0, 6);
+  const visibleAudiobookChapters = viewAllAudiobookChapters
+    ? audiobookChapters
+    : audiobookChapters.slice(0, 6);
+
   return (
     <div className="homepage-container">
-      <h2>Chapters</h2>
+      <div className="section-header">
+        <h2>Chapters</h2>
+        {chapters.length > 6 && (
+          <button onClick={() => setViewAllChapters(!viewAllChapters)}>
+            {viewAllChapters ? "Show Less" : "View All"}
+          </button>
+        )}
+      </div>
       {chapters.length > 0 ? (
-        <div className="chapter-list">
-          {chapters.map((chapter) => (
+        <div className="chapter-list-homepage">
+          {visibleChapters.map((chapter) => (
             <ChapterCard
               key={chapter.id}
               title={chapter.title}
@@ -118,10 +133,21 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
       ) : (
         <div>No chapters found.</div>
       )}
-      <h2>Audiobook Chapters</h2>
+      <div className="section-header">
+        <h2>Audiobook Chapters</h2>
+        {audiobookChapters.length > 6 && (
+          <button
+            onClick={() =>
+              setViewAllAudiobookChapters(!viewAllAudiobookChapters)
+            }
+          >
+            {viewAllAudiobookChapters ? "Show Less" : "View All"}
+          </button>
+        )}
+      </div>
       {audiobookChapters.length > 0 ? (
         <div className="chapter-list-audiobook">
-          {audiobookChapters.map((chapter) => (
+          {visibleAudiobookChapters.map((chapter) => (
             <ChapterCardAudiobook
               key={chapter.id}
               title={chapter.title}
