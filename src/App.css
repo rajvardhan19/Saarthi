@@ -1,6 +1,7 @@
 .app {
   display: flex;
-  font-family: Arial, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   height: 100vh;
 }
 body,
@@ -13,10 +14,89 @@ html {
 
 .homepage-container {
   padding: 20px;
+  margin: 0px 15px;
   /* This ensures only the homepage content scrolls */
   height: calc(
     100vh - 150px
   ); /* Adjust this value based on your header/footer height */
+  overflow-y: auto; /* Add this to make the container scrollable if content overflows */
+  margin-bottom: 50px;
+}
+@media screen and (max-width: 768px) {
+  .homepage-container {
+    height: calc(
+      100vh - 60px
+    ); /* Adjust this value based on your header/footer height */
+    margin: 0px 5px !important;
+  }
+}
+
+.chapter-list-homepage,
+.chapter-list-audiobook {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.chapter-list-homepage {
+  grid-template-columns: repeat(6, 1fr); /* 6 columns by default */
+}
+
+.chapter-list-audiobook {
+  grid-template-columns: repeat(6, 1fr); /* 6 columns by default */
+  margin-bottom: 50px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1200px) {
+  .chapter-list-homepage,
+  .chapter-list-audiobook,
+  .aarti-list {
+    grid-template-columns: repeat(
+      4,
+      1fr
+    ) !important; /* 4 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .chapter-list-homepage,
+  .chapter-list-audiobook,
+  .aarti-list {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ) !important; /* 2 columns on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    overflow: hidden;
+  }
+  .chapter-list-homepage,
+  .chapter-list-audiobook {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ) !important; /* 1 column on very small screens */
+  }
+  .aarti-list {
+    grid-template-columns: 1fr !important;
+  }
+  .aarti-card {
+    margin-left: 85px !important;
+  }
+  .chapter-card,
+  .chapter-card-audiobook {
+    width: 162px !important;
+  }
 }
 
 .main {
@@ -36,6 +116,7 @@ html {
   padding-bottom: 0.5rem; /* equivalent to py-2 (bottom padding) */
   margin-right: 0;
 }
+/* General sidebar styles */
 .sidebar {
   width: 260px;
   height: auto;
@@ -46,33 +127,32 @@ html {
   padding: 20px;
   gap: 0.5rem;
 }
+
 .sidebar-header {
-  background-color: #e2e2e2; /* equivalent to bg-neutral-900 */
-  border-radius: 0.5rem; /* equivalent to rounded-lg */
-  height: fit-content; /* equivalent to h-fit */
-  width: 100%; /* equivalent to w-full */
+  background-color: #e2e2e2;
+  border-radius: 0.5rem;
+  height: fit-content;
+  width: 100%;
 }
+
 .sidebar-title {
   margin-top: 0px;
   font-size: 32px;
   font-weight: bold;
-  /* justify-content: center;
-  display: flex;
-  align-items: center; */
 }
+
 .sidebar-item-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-
-  background-color: #e2e2e2; /* equivalent to bg-neutral-900 */
-  border-radius: 0.5rem; /* equivalent to rounded-lg */
-  width: 100%; /* equivalent to w-full */
-  overflow-y: auto; /* equivalent to overflow-y-auto */
-  height: 93%; /* equivalent to h-full */
-
+  background-color: #e2e2e2;
+  border-radius: 0.5rem;
+  width: 100%;
+  overflow-y: auto;
+  height: 93%;
   font-weight: 700;
 }
+
 .sidebar-items {
   display: flex;
   flex-direction: column;
@@ -86,29 +166,6 @@ html {
   border-radius: 4px;
   display: flex;
   transition: background-color 0.3s;
-}
-.sidebar-element {
-  margin-left: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sidebar-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.sidebar-item.active {
-  background-color: white;
-  border-top-right-radius: 100%;
-  border-bottom-right-radius: 100%;
-}
-
-.sidebar-item:hover {
-  background-color: white;
-}
-.sidebar-item {
-  display: flex;
   align-items: center;
 }
 
@@ -129,12 +186,88 @@ html {
 .sidebar-item.active .active-icon {
   display: inline;
 }
+
+/* Styles for smaller screens */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 95%;
+    height: 45px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #d4d4d4;
+  }
+
+  .sidebar-header {
+    display: none;
+  }
+  /* Add this CSS to your styles */
+
+  @media (max-width: 768px) {
+    .hide-on-mobile {
+      display: none !important;
+    }
+  }
+
+  .sidebar-item-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    overflow: hidden;
+  }
+
+  .sidebar-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .sidebar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .sidebar-icon {
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  .sidebar-title {
+    display: none;
+  }
+
+  .sidebar-item.active .default {
+    display: none;
+  }
+
+  .sidebar-item.active .active-icon {
+    display: inline;
+  }
+
+  .sidebar-item .default {
+    display: inline;
+  }
+
+  .sidebar-item .active-icon {
+    display: none;
+  }
+}
+
 .main-header {
   height: fit-content;
   background: linear-gradient(to bottom, #b45309, #d4d4d4);
   padding: 1.5rem;
   border-radius: 0.5rem;
   margin-right: 15px;
+  margin-left: 15px;
 }
 
 .header {
@@ -214,6 +347,7 @@ html {
 }
 .liked-container {
   margin-left: 25px;
+  margin-bottom: 50px;
 }
 
 .header-search {
@@ -286,7 +420,10 @@ html {
   overflow: hidden;
   margin: 15px;
 }
-
+.aarti-header {
+  margin: 0px 15px;
+  font-size: 1.5rem;
+}
 .chapter-image-audiobook {
   width: 100%;
   height: 100%;
@@ -476,6 +613,7 @@ html {
 }
 .main-content {
   padding: 20px;
+  margin: 0px 15px;
 }
 .chapters {
   margin-bottom: 20px;
@@ -493,6 +631,7 @@ html {
   padding: 20px;
   flex: 1;
   overflow-y: auto;
+  margin-bottom: 70px;
 }
 
 .section-header {
@@ -568,18 +707,18 @@ html {
   margin-bottom: 50px;
 }
 .recently-read-section {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .recently-read-list {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 .recently-read-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px;
 }
 .recently-heard-list {
   display: flex;
@@ -598,6 +737,7 @@ html {
   position: relative;
   overflow: hidden;
   margin-right: 15px;
+  margin-left: 15px;
 }
 
 .chatbot-messages {
@@ -898,6 +1038,11 @@ html {
   ); /* Equivalent to bg-neutral-100/10 */
   padding-right: 1rem; /* Equivalent to pr-4 */
   transition: background-color 0.2s; /* Equivalent to transition */
+}
+@media screen and (max-width: 768px) {
+  .button {
+    width: 100%;
+  }
 }
 
 .button:hover {

@@ -14,7 +14,7 @@ import AuthModal from "./components/AuthModal";
 import supabase from "./components/supabaseClient";
 import Aarti from "./components/Aarti";
 import AartiPlayer from "./components/AartiPlayer";
-import Homepage from "./components/Homepage"; // Import the Homepage component
+import Homepage from "./components/Homepage";
 import "./App.css";
 
 const App = () => {

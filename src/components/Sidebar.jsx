@@ -1,5 +1,4 @@
 import React from "react";
-import { FaReadme } from "react-icons/fa";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
 import {
   IoChatboxEllipses,
@@ -40,7 +39,7 @@ const Sidebar = ({ onProtectedAction }) => {
 
           <NavLink
             to="/read-chapters"
-            className="sidebar-item"
+            className="sidebar-item hide-on-mobile"
             activeClassName="active"
           >
             <IoReaderOutline className="sidebar-icon default" />
@@ -50,13 +49,14 @@ const Sidebar = ({ onProtectedAction }) => {
 
           <NavLink
             to="/audiobook"
-            className="sidebar-item"
+            className="sidebar-item hide-on-mobile"
             activeClassName="active"
           >
             <MdOutlineAudiotrack className="sidebar-icon default" />
             <MdAudiotrack className="sidebar-icon active-icon" />
             Audiobook
           </NavLink>
+
           <NavLink
             to="/chatbot"
             className="sidebar-item"
@@ -67,6 +67,7 @@ const Sidebar = ({ onProtectedAction }) => {
             <IoChatboxEllipses className="sidebar-icon active-icon" />
             Saarthi Chatbot
           </NavLink>
+
           <NavLink
             to="/aartis"
             className="sidebar-item"
@@ -76,6 +77,7 @@ const Sidebar = ({ onProtectedAction }) => {
             <PiHandsPrayingBold className="sidebar-icon active-icon" />
             Aartis
           </NavLink>
+
           <NavLink
             to="/liked"
             className="sidebar-item"

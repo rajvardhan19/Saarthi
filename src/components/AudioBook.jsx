@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import RecentlyHeard from "./RecentlyHeard";
-import RecentlyHeardLeft from "./RecentlyHeardLeft";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
 
 const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
@@ -21,6 +20,10 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
       }
     };
 
+    fetchChapters();
+  }, []);
+
+  useEffect(() => {
     const fetchLikedChapters = async () => {
       if (!onProtectedAction()) return;
 
@@ -38,6 +41,8 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
     };
 
     const fetchRecentlyHeard = async () => {
+      if (!onProtectedAction()) return;
+
       const { data, error } = await supabase
         .from("recently_heard")
         .select("*")
@@ -52,7 +57,6 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
       }
     };
 
-    fetchChapters();
     fetchLikedChapters();
     fetchRecentlyHeard();
   }, [onProtectedAction, userId]);
