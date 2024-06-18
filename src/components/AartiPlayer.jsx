@@ -15,15 +15,22 @@ const AartiPlayer = ({ selectedLanguage }) => {
   const [aartis, setAartis] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
 
+  // Determine the table name based on selected language
+  const getTableName = () => {
+    switch (selectedLanguage) {
+      case "hindi":
+        return "hindi_aartis";
+      case "marathi":
+        return "marathi_aartis";
+      default:
+        return "aartis";
+    }
+  };
+
   // Fetch aartis based on selected language
   useEffect(() => {
     const fetchAartis = async () => {
-      const tableName =
-        selectedLanguage === "hindi"
-          ? "hindi_aartis"
-          : selectedLanguage === "marathi"
-          ? "marathi_aartis"
-          : "aartis";
+      const tableName = getTableName();
 
       const { data, error } = await supabase.from(tableName).select("*");
       if (error) {
@@ -41,12 +48,7 @@ const AartiPlayer = ({ selectedLanguage }) => {
     const fetchAarti = async () => {
       if (!aartis.length) return;
 
-      const tableName =
-        selectedLanguage === "hindi"
-          ? "hindi_aartis"
-          : selectedLanguage === "marathi"
-          ? "marathi_aartis"
-          : "aartis";
+      const tableName = getTableName();
 
       const { data, error } = await supabase
         .from(tableName)

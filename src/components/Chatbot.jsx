@@ -49,7 +49,7 @@ const Chatbot = () => {
     const enhancedMessage =
       text +
       "\n" +
-      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Also discuss some strategy to navigate through this problem. Please give response in paragraph form.";
+      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Also discuss some strategy to navigate through this problem. Please give response in paragraph form in plain text, no need of any text stylings like bold or italics.";
 
     // Define the request payload
     const payload = {

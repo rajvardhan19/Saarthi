@@ -186,6 +186,11 @@ html {
 .sidebar-item.active .active-icon {
   display: inline;
 }
+.sidebar-item.active {
+  background-color: white;
+  border-top-right-radius: 100%;
+  border-bottom-right-radius: 100%;
+}
 
 /* Styles for smaller screens */
 @media (max-width: 768px) {
@@ -202,7 +207,11 @@ html {
     right: 0;
     background-color: #d4d4d4;
   }
-
+  .sidebar-item.active {
+    background-color: white;
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+  }
   .sidebar-header {
     display: none;
   }
@@ -747,7 +756,7 @@ html {
   position: relative; /* Position relative to contain the ripple effect */
   background-image: url("/chatbotbg.jpg");
   background-color: #cccccc; /* Used if the image is unavailable */
-  height: 35rem; /* You must set a specified height */
+  height: 31rem; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
