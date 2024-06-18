@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSpeechSynthesis } from "react-speech-kit";
+import Speech from "speak-tts";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -8,7 +8,27 @@ const Chatbot = () => {
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
   const [rippleActive, setRippleActive] = useState(false);
   const [showCards, setShowCards] = useState(true);
-  const { speak } = useSpeechSynthesis();
+
+  const speech = new Speech();
+  useEffect(() => {
+    if (speech.hasBrowserSupport()) {
+      speech
+        .init({
+          volume: 1,
+          lang: "en-US",
+          rate: 1,
+          pitch: 1,
+          voice: "Google US English",
+          splitSentences: true,
+        })
+        .then((data) => {
+          console.log("Speech is ready", data);
+        })
+        .catch((e) => {
+          console.error("An error occurred while initializing: ", e);
+        });
+    }
+  }, []);
 
   const handleSendMessage = async (messageText) => {
     const text = messageText || input;
@@ -60,7 +80,7 @@ const Chatbot = () => {
         // Add Gemini's response to the message list
         setMessages((prevMessages) => [...prevMessages, geminiMessage]);
         // Read the response aloud
-        speak({ text: geminiMessage.text });
+        speech.speak({ text: geminiMessage.text });
       } else {
         throw new Error("No response from Gemini");
       }
@@ -75,7 +95,7 @@ const Chatbot = () => {
         },
       ]);
       // Read the error message aloud
-      speak({ text: errorMessage });
+      speech.speak({ text: errorMessage });
     }
     setGeneratingAnswer(false);
     // Clear the input field
