@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
+import React, { useEffect, useState, useRef } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { FaPlay, FaPause, FaStepBackward, FaStepForward } from "react-icons/fa";
 import supabase from "./supabaseClient";
 
-const AartiPlayer = ({ userId }) => {
+const AartiPlayer = ({ selectedLanguage }) => {
   const { aartiId } = useParams();
-  // const history = useHistory();
+  const navigate = useNavigate();
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [aarti, setAarti] = useState(null);
@@ -16,49 +15,66 @@ const AartiPlayer = ({ userId }) => {
   const [aartis, setAartis] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
 
+  // Fetch aartis based on selected language
   useEffect(() => {
     const fetchAartis = async () => {
-      const { data, error } = await supabase.from("aartis").select("*");
+      const tableName =
+        selectedLanguage === "hindi"
+          ? "hindi_aartis"
+          : selectedLanguage === "marathi"
+          ? "marathi_aartis"
+          : "aartis";
+
+      const { data, error } = await supabase.from(tableName).select("*");
       if (error) {
         console.error("Error fetching aartis:", error);
       } else {
         setAartis(data);
       }
     };
-    fetchAartis();
-  }, []);
 
+    fetchAartis();
+  }, [selectedLanguage]);
+
+  // Fetch specific aarti based on aartiId and selected language
   useEffect(() => {
     const fetchAarti = async () => {
-      console.log("Fetching aarti with id:", aartiId);
+      if (!aartis.length) return;
+
+      const tableName =
+        selectedLanguage === "hindi"
+          ? "hindi_aartis"
+          : selectedLanguage === "marathi"
+          ? "marathi_aartis"
+          : "aartis";
+
       const { data, error } = await supabase
-        .from("aartis")
+        .from(tableName)
         .select("*")
         .eq("id", aartiId)
         .single();
       if (error) {
         console.error("Error fetching aarti:", error);
       } else {
-        console.log("Fetched aarti:", data);
         setAarti(data);
-        const publicUrl = data.aarti_url;
-        console.log("Fetched audio URL:", publicUrl);
-        setAudioUrl(publicUrl);
+        setAudioUrl(data.aarti_url);
 
-        const index = aartis.findIndex((aarti) => aarti.id === data.id);
+        const index = aartis.findIndex((a) => a.id === data.id);
         setCurrentIndex(index);
       }
     };
-    fetchAarti();
-  }, [aartiId, aartis]);
 
+    fetchAarti();
+  }, [aartiId, aartis, selectedLanguage]);
+
+  // Update audio source when audioUrl changes
   useEffect(() => {
     if (audioUrl) {
-      console.log("Setting audio URL:", audioUrl);
       audioRef.current.src = audioUrl;
     }
   }, [audioUrl]);
 
+  // Control play/pause state of audio
   useEffect(() => {
     if (isPlaying && audioRef.current) {
       audioRef.current.play();
@@ -67,6 +83,7 @@ const AartiPlayer = ({ userId }) => {
     }
   }, [isPlaying]);
 
+  // Handle audio events
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -108,14 +125,14 @@ const AartiPlayer = ({ userId }) => {
   const handlePrevious = () => {
     if (currentIndex > 0) {
       const previousAarti = aartis[currentIndex - 1];
-      // history.push(`/aartis/${previousAarti.id}`);
+      navigate(`/aarti/${previousAarti.id}`);
     }
   };
 
   const handleNext = () => {
     if (currentIndex < aartis.length - 1) {
       const nextAarti = aartis[currentIndex + 1];
-      // history.push(`/aartis/${nextAarti.id}`);
+      navigate(`/aarti/${nextAarti.id}`);
     }
   };
 

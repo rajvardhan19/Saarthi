@@ -2,13 +2,25 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import AartiCard from "./AartiCard";
 
-const Aarti = ({ userId }) => {
+const Aarti = ({ userId, selectedLanguage }) => {
   const [aartis, setAartis] = useState([]);
   const [viewAll, setViewAll] = useState(false);
 
   useEffect(() => {
     const fetchAartis = async () => {
-      const { data, error } = await supabase.from("aartis").select("*");
+      let tableName;
+      switch (selectedLanguage) {
+        case "hindi":
+          tableName = "hindi_aartis";
+          break;
+        case "marathi":
+          tableName = "marathi_aartis";
+          break;
+        default:
+          tableName = "aartis";
+      }
+
+      const { data, error } = await supabase.from(tableName).select("*");
       if (error) {
         console.error("Error fetching aartis:", error);
       } else {
@@ -17,7 +29,7 @@ const Aarti = ({ userId }) => {
     };
 
     fetchAartis();
-  }, []);
+  }, [selectedLanguage]);
 
   const visibleAartis = viewAll ? aartis : aartis.slice(0, 6);
 

@@ -12,9 +12,12 @@ const Header = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const showLanguageDropdown = ["/audiobook", "/read-chapters", "/"].includes(
-    location.pathname
-  );
+  const showLanguageDropdown = [
+    "/audiobook",
+    "/read-chapters",
+    "/",
+    "/aartis",
+  ].includes(location.pathname);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -67,7 +70,13 @@ const Header = ({
                     value={selectedLanguage}
                     onChange={handleLanguageChange}
                   >
-                    {location.pathname === "/read-chapters" ? (
+                    {location.pathname === "/aartis" ? (
+                      <>
+                        <option value="hindi">Hindi</option>
+                        <option value="gujarati">Gujarati</option>
+                        <option value="marathi">Marathi</option>
+                      </>
+                    ) : location.pathname === "/read-chapters" ? (
                       <>
                         <option value="english">English</option>
                         <option value="assamese">Assamese</option>
@@ -119,9 +128,9 @@ const Header = ({
         )}
       </div>
       <div>
-        {["/read-chapters", "/audiobook", "/"].includes(location.pathname) && (
-          <LikedButton />
-        )}
+        {["/read-chapters", "/audiobook", "/", "/aartis"].includes(
+          location.pathname
+        ) && <LikedButton />}
       </div>
     </div>
   );

@@ -144,7 +144,12 @@ const App = () => {
             />
             <Route
               path="/aartis"
-              element={<Aarti userId={session?.user?.id} />}
+              element={
+                <Aarti
+                  userId={session?.user?.id}
+                  selectedLanguage={selectedLanguage}
+                />
+              }
             />
             <Route
               path="/aarti/:aartiId"
