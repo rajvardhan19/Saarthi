@@ -101,10 +101,10 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
     return <div>Loading...</div>;
   }
 
-  const visibleChapters = viewAllChapters ? chapters : chapters.slice(0, 6);
+  const visibleChapters = viewAllChapters ? chapters : chapters.slice(0, 5);
   const visibleAudiobookChapters = viewAllAudiobookChapters
     ? audiobookChapters
-    : audiobookChapters.slice(0, 6);
+    : audiobookChapters.slice(0, 5);
 
   return (
     <div className="homepage-container">

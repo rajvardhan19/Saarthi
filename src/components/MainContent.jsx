@@ -90,7 +90,7 @@ const MainContent = ({ onProtectedAction, userId, selectedLanguage }) => {
     return <div>Loading...</div>;
   }
 
-  const visibleChapters = viewAll ? chapters : chapters.slice(0, 6);
+  const visibleChapters = viewAll ? chapters : chapters.slice(0, 5);
 
   const handleViewAllClick = () => {
     setViewAll(!viewAll);

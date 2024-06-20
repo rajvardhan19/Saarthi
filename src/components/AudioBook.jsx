@@ -88,7 +88,7 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
     }
   }, [chapters, selectedLanguage]);
 
-  const visibleChapters = viewAll ? chapters : chapters.slice(0, 6);
+  const visibleChapters = viewAll ? chapters : chapters.slice(0, 5);
 
   return (
     <div className="main-content-audiobook">
