@@ -4,6 +4,22 @@
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   height: 100vh;
 }
+.box {
+  /* dark mode */
+  /* background-color: rgba(23, 23, 23, 0.886); */
+
+  background-color: #e2e2e2;
+  height: 93%;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  border-radius: 0.5rem;
+  overflow-y: auto; /* Ensure the box itself can scroll */
+}
+h2 {
+  color: #000;
+}
+
 body,
 html {
   margin: 0;
@@ -15,12 +31,9 @@ html {
 .homepage-container {
   padding: 20px;
   margin: 0px 15px;
-  /* This ensures only the homepage content scrolls */
-  height: calc(
-    100vh - 150px
-  ); /* Adjust this value based on your header/footer height */
-  overflow-y: auto; /* Add this to make the container scrollable if content overflows */
-  margin-bottom: 50px;
+  height: 100%; /* Make the homepage container take full height of the box */
+  overflow-y: auto; /* Enable scrolling within the homepage container */
+  box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 @media screen and (max-width: 768px) {
   .homepage-container {
@@ -28,6 +41,10 @@ html {
       100vh - 60px
     ); /* Adjust this value based on your header/footer height */
     margin: 0px 5px !important;
+  }
+  .box {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 
@@ -105,11 +122,10 @@ html {
   flex-direction: column;
   background-color: #d4d4d4; /* Equivalent to bg-white */
 
-  height: 100%; /* Equivalent to h-full */
   width: 100%; /* Equivalent to w-full */
   overflow: hidden; /* Equivalent to overflow-hidden */
   overflow-y: auto; /* Equivalent to overflow-y-auto */
-  height: 100%; /* equivalent to h-full */
+  height: 103%; /* equivalent to h-full */
   /* equivalent to flex-1 */
   /* equivalent to overflow-y-auto */
   padding-top: 1.2rem; /* equivalent to py-2 (top padding) */
@@ -167,12 +183,22 @@ html {
   display: flex;
   transition: background-color 0.3s;
   align-items: center;
+  color: #000;
+  text-decoration: none;
 }
 
 .sidebar-icon {
   font-size: 1.5em;
   margin-right: 10px;
   display: none;
+}
+@media screen and (max-width: 768px) {
+  .sidebar-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+    display: inline;
+    margin-bottom: 25px;
+  }
 }
 
 .sidebar-icon.default {
@@ -272,11 +298,13 @@ html {
 
 .main-header {
   height: fit-content;
-  background: linear-gradient(to bottom, #b45309, #d4d4d4);
+  background: linear-gradient(to bottom, #b45309, #e2e2e2);
+  /* dark mode */
+  /* background: linear-gradient(rgba(180, 83, 9, 1), rgba(23, 23, 23, 0.886)); */
   padding: 1.5rem;
   border-radius: 0.5rem;
-  margin-right: 15px;
-  margin-left: 15px;
+  /* margin-right: 15px;
+  margin-left: 15px; */
 }
 
 .header {
@@ -705,7 +733,7 @@ html {
 }
 .aarti-list {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 columns */
+  grid-template-columns: repeat(5, 1fr); /* 6 columns */
   gap: 10px;
   flex-wrap: wrap;
 }
@@ -741,25 +769,26 @@ html {
   gap: 10px;
 }
 
-/* ChatBot  */
+/* ChatBot */
 .chatbot {
   position: relative;
-  overflow: hidden;
-  margin-right: 15px;
-  margin-left: 15px;
+  overflow: hidden; /* Ensures no overflow */
+  height: 84vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
 }
 
 .chatbot-messages {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: hidden; /* Hide vertical overflow */
   padding: 10px;
   position: relative; /* Position relative to contain the ripple effect */
   background-image: url("/chatbotbg.jpg");
   background-color: #cccccc; /* Used if the image is unavailable */
-  height: 31rem; /* You must set a specified height */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
+  z-index: 1; /* Ensure messages are above the ripple */
 }
 
 .ripple {
@@ -795,6 +824,7 @@ html {
   position: relative;
   z-index: 1;
 }
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -804,6 +834,7 @@ html {
   margin: 10px 0;
   align-items: center;
 }
+
 .card {
   background-color: #f0f0f0;
   padding: 10px;
@@ -815,6 +846,7 @@ html {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .card-text {
   font-size: 16px;
   font-weight: bold;
@@ -852,6 +884,7 @@ html {
   border-top: 1px solid #ccc;
   background-color: #d4d4d4;
   border-radius: 0.5rem;
+  z-index: 1;
 }
 
 .chatbot-input input {
@@ -884,12 +917,13 @@ html {
 /* Pdf Viewer */
 .pdf-viewer {
   width: 100%;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 /* Audio Player */
+
 .controls {
   display: flex;
   justify-content: center;
@@ -897,10 +931,10 @@ html {
   gap: 20px;
 }
 .chapter-image-audio-player {
-  width: 512px;
-  margin-left: 30%;
+  width: 450px;
+  margin-left: 33%;
   margin-top: 25px;
-  height: 512px;
+  height: 450px;
   object-fit: cover;
 }
 .aarti-image-audio-player {
