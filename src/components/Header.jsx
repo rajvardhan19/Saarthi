@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import LikedButton from "./LikedButton";
@@ -22,6 +22,10 @@ const Header = ({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", isDarkTheme);
+  }, [isDarkTheme]);
+
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
@@ -40,7 +44,6 @@ const Header = ({
 
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
-    document.body.style.backgroundColor = isDarkTheme ? "#000" : "#fff";
   };
 
   return (

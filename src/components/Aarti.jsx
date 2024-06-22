@@ -73,7 +73,7 @@ const Aarti = ({ userId, selectedLanguage }) => {
       <div className="aartis-section">
         <div className="section-header-aarti">
           <h2 className="aarti-header">Aartis</h2>
-          <button onClick={handleViewAll}>
+          <button onClick={handleViewAll} className="view-all">
             {viewAll ? "Show Less" : "View All"}
           </button>
         </div>

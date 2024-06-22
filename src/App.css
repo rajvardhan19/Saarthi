@@ -5,9 +5,6 @@
   height: 100vh;
 }
 .box {
-  /* dark mode */
-  /* background-color: rgba(23, 23, 23, 0.886); */
-
   background-color: #e2e2e2;
   height: 93%;
   margin-left: 15px;
@@ -20,6 +17,50 @@ h2 {
   color: #000;
 }
 
+/* DARK MODE */
+.dark-mode .box {
+  background-color: rgb(23, 23, 23);
+}
+.dark-mode h2 {
+  color: #fff;
+}
+.dark-mode .main-header {
+  background: linear-gradient(rgb(180, 83, 9), rgb(23, 23, 23));
+}
+.dark-mode .header-title {
+  color: #fff;
+}
+.dark-mode .text {
+  color: #fff;
+}
+.dark-mode .sidebar {
+  background-color: #000;
+  color: #fff;
+}
+.dark-mode .sidebar-header {
+  background-color: rgb(23, 23, 23);
+}
+.dark-mode .sidebar-item-container {
+  background-color: rgb(23, 23, 23);
+}
+.dark-mode .sidebar-item {
+  color: #fff;
+}
+.dark-mode .sidebar-item.active {
+  background-color: #fff;
+  color: #000;
+}
+.dark-mode .main {
+  background-color: #000;
+}
+.dark-mode .chatbot-input {
+  background-color: rgb(23, 23, 23);
+  border-top: 1px solid rgb(23, 23, 23);
+}
+.dark-mode .view-all {
+  background-color: #fff;
+  color: #000;
+}
 body,
 html {
   margin: 0;
@@ -320,8 +361,7 @@ html {
 .main-header {
   height: fit-content;
   background: linear-gradient(to bottom, #b45309, #e2e2e2);
-  /* dark mode */
-  /* background: linear-gradient(rgba(180, 83, 9, 1), rgba(23, 23, 23, 0.886)); */
+
   padding: 1.5rem;
   border-radius: 0.5rem;
   /* margin-right: 15px;
@@ -376,7 +416,7 @@ html {
   margin: 10px 0;
   font-size: 24px;
   font-weight: bold;
-  color: #000;
+  /* color: #000; */
 }
 
 .login-button {
@@ -964,10 +1004,11 @@ html {
   object-fit: cover;
 }
 .aarti-image-audio-player {
-  width: 512px;
-  margin-left: 30%;
+  width: 36%;
+  margin-left: 32%;
+  margin-right: 32%;
   margin-top: 25px;
-  height: 512px;
+  height: 450px;
   object-fit: cover;
 }
 .time {
@@ -1121,6 +1162,14 @@ html {
     height: 350px !important;
     object-fit: cover;
   }
+  .aarti-image-audio-player {
+    width: 76% !important;
+    margin-left: 12% !important;
+    margin-right: 12% !important;
+    margin-top: 25px;
+    height: 350px !important;
+    object-fit: cover;
+  }
   .current-time {
     margin-right: 67%;
   }
@@ -1154,7 +1203,7 @@ html {
 }
 
 .text {
-  color: #000;
+  /* color: #000; */
   font-size: 16px;
   font-weight: 700; /* Equivalent to font-medium */
   white-space: nowrap; /* Equivalent to truncate */

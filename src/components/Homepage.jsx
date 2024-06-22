@@ -111,7 +111,10 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
       <div className="section-header">
         <h2>Chapters</h2>
         {chapters.length > 6 && (
-          <button onClick={() => setViewAllChapters(!viewAllChapters)}>
+          <button
+            onClick={() => setViewAllChapters(!viewAllChapters)}
+            className="view-all"
+          >
             {viewAllChapters ? "Show Less" : "View All"}
           </button>
         )}
@@ -140,6 +143,7 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
             onClick={() =>
               setViewAllAudiobookChapters(!viewAllAudiobookChapters)
             }
+            className="view-all"
           >
             {viewAllAudiobookChapters ? "Show Less" : "View All"}
           </button>

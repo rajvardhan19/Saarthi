@@ -102,7 +102,7 @@ const MainContent = ({ onProtectedAction, userId, selectedLanguage }) => {
         <div className="chapters">
           <div className="section-header">
             <h2>Chapters</h2>
-            <button onClick={handleViewAllClick}>
+            <button onClick={handleViewAllClick} className="view-all">
               {viewAll ? "Show Less" : "View All"}
             </button>
           </div>
