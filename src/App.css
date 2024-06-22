@@ -87,10 +87,10 @@ html {
   .box {
     margin-left: 15px;
     margin-right: 15px;
-    height: 88vh !important;
+    height: 89vh !important;
   }
   .chatbot {
-    height: 78vh !important;
+    height: 76vh !important;
   }
   .card {
     height: 90px !important;
@@ -282,11 +282,11 @@ html {
 @media (max-width: 768px) {
   .sidebar {
     width: 95%;
-    height: 54px;
+    height: 8vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
+    padding: 0px 10px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -839,7 +839,6 @@ html {
   flex-direction: column;
   max-width: 100%; /* Optional: add max-width for better layout control */
   margin: 0 auto; /* Center the chatbot */
-  border: 1px solid #ddd; /* Optional: add border for visual separation */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: add box shadow for better visual appearance */
 }
 
@@ -946,8 +945,8 @@ html {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-top: 1px solid #ccc;
-  background-color: #d4d4d4;
+  /* border-top: 1px solid #ccc; */
+  /* background-color: #d4d4d4; */
   border-radius: 0.5rem;
   z-index: 1;
 }
