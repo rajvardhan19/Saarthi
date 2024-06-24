@@ -151,7 +151,7 @@ html {
 
 @media (max-width: 768px) {
   .main {
-    padding-top: 0 !;
+    padding-top: 0 !important;
   }
   .chapter-list-homepage,
   .chapter-list-audiobook,
