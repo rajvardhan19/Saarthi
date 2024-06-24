@@ -91,6 +91,73 @@ html {
   overflow-y: auto; /* Enable scrolling within the homepage container */
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
+.dropdown-menu {
+  background: #f8f9fa; /* Light background for better contrast */
+  border: 1px solid #ddd; /* Soft border */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 20px; /* Internal padding for spacing */
+  width: 150px; /* Limit width for mobile responsiveness */
+  margin: 10px auto; /* Center alignment */
+}
+
+.theme,
+.language-dpd,
+.logout {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  margin-bottom: 15px; /* Spacing between sections */
+}
+
+.theme p,
+.language-dpd p {
+  margin: 0 0 10px 0; /* Space below the labels */
+  font-weight: bold; /* Bold labels */
+}
+
+.theme-button,
+.logout-button {
+  margin: 5px 0; /* Margin for top and bottom */
+  width: 100%; /* Full width for buttons */
+  padding: 10px; /* Padding for buttons */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #d4d4d4; /* Primary color background */
+  color: black; /* White text */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Smooth transition */
+}
+
+.theme-button:hover,
+.logout-button:hover {
+  background-color: #c2c2c2; /* Darker on hover */
+}
+
+.dropdown {
+  margin: 10px 0; /* Margin for top and bottom */
+  height: 40px; /* Fixed height */
+  width: 100%; /* Full width */
+  background: #fff; /* White background */
+  border: 1px solid #ccc; /* Soft border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 0 10px; /* Padding for internal spacing */
+  font-size: 16px; /* Larger font size */
+  color: #333; /* Dark text color */
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    padding: 15px; /* Less padding on smaller screens */
+    width: 120px !important;
+  }
+  .theme-button,
+  .logout-button {
+    padding: 8px; /* Smaller padding for buttons */
+  }
+  .dropdown {
+    height: 36px; /* Smaller height for dropdown */
+  }
+}
 
 @media screen and (max-width: 768px) {
   .homepage-container {
@@ -106,7 +173,7 @@ html {
     height: 89vh !important;
   }
   .chatbot {
-    height: 65vh !important;
+    height: 70vh !important;
   }
   .card {
     height: 90px !important;
@@ -139,7 +206,11 @@ html {
   align-items: center;
   margin-bottom: 10px;
 }
-
+@media screen and (max-width: 425px) {
+  .chatbot {
+    height: 65vh !important;
+  }
+}
 @media (max-width: 1200px) {
   .chapter-list-homepage,
   .chapter-list-audiobook,
@@ -429,12 +500,12 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-menu button,
+/* .dropdown-menu button,
 .dropdown-menu select {
   display: block;
   width: 100%;
   margin: 5px 0;
-}
+} */
 
 .header-title {
   margin: 10px 0;
@@ -1090,14 +1161,6 @@ html {
 
 .search-result-title {
   font-weight: bold;
-}
-.dropdown {
-  margin: 15px;
-  height: 40px;
-  width: 160px;
-  background: transparent;
-  border: 2px solid black;
-  border-radius: 12px;
 }
 
 .login-button {
