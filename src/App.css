@@ -151,7 +151,7 @@ html {
 
 @media (max-width: 768px) {
   .main {
-    padding-top: 0 !important;
+    padding-top: 0 !;
   }
   .chapter-list-homepage,
   .chapter-list-audiobook,
@@ -873,7 +873,7 @@ html {
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
-  z-index: 1; /* Ensure messages are above the ripple */
+  /* z-index: 1; Ensure messages are above the ripple */
 }
 
 .ripple {
@@ -907,7 +907,7 @@ html {
 .card,
 .message {
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .card-container {
@@ -969,7 +969,7 @@ html {
   /* border-top: 1px solid #ccc; */
   /* background-color: #d4d4d4; */
   border-radius: 0.5rem;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 .chatbot-input input {
