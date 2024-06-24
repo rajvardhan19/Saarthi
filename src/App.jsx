@@ -112,7 +112,7 @@ const App = () => {
                 element={
                   <AudioBook
                     selectedLanguage={selectedLanguage}
-                    // onProtectedAction={handleProtectedAction}
+                    onProtectedAction={handleProtectedAction}
                     userId={session?.user?.id}
                   />
                 }

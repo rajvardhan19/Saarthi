@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Speech from "speak-tts";
+import { marked } from "marked";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -49,7 +50,7 @@ const Chatbot = () => {
     const enhancedMessage =
       text +
       "\n" +
-      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Also discuss some strategy to navigate through this problem. Please give response in paragraph form in plain text, no need of any text stylings like bold or italics.";
+      " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Also discuss some strategy to navigate through this problem.";
 
     // Define the request payload
     const payload = {
@@ -132,9 +133,13 @@ const Chatbot = () => {
           </div>
         )}
         {messages.map((message, index) => (
-          <div key={index} className={`message ${message.sender}`}>
-            {message.text}
-          </div>
+          <div
+            key={index}
+            className={`message ${message.sender}`}
+            dangerouslySetInnerHTML={{
+              __html: marked(message.text),
+            }}
+          ></div>
         ))}
       </div>
       <div className="chatbot-input">
