@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
+import Loader from "./Loader";
 
 const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
   const [likedChapters, setLikedChapters] = useState([]);
@@ -89,7 +90,11 @@ const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
   }, [likedChapters, likedAudiobookChapters, selectedLanguage]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { FaPlay, FaPause, FaStepBackward, FaStepForward } from "react-icons/fa";
 import supabase from "./supabaseClient";
+import Loader from "./Loader";
 
 const AartiPlayer = ({ userId }) => {
   const { aartiId } = useParams();
@@ -121,7 +122,11 @@ const AartiPlayer = ({ userId }) => {
   };
 
   if (!audioUrl) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (

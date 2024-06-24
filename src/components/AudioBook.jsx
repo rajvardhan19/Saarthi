@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import RecentlyHeard from "./RecentlyHeard";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
+import Loader from "./Loader";
 
 const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
   const [chapters, setChapters] = useState([]);
@@ -101,7 +102,9 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
         </div>
         <div className="chapter-list-audiobook">
           {visibleChapters.length === 0 ? (
-            <p>No chapters found</p>
+            <div>
+              <Loader />
+            </div>
           ) : (
             visibleChapters.map((chapter) => (
               <ChapterCardAudiobook

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import supabase from "./supabaseClient";
 import AuthModal from "./AuthModal";
+import Loader from "./Loader";
 
 const AuthWrapper = ({ children }) => {
   const [session, setSession] = useState(null);
@@ -31,7 +32,13 @@ const AuthWrapper = ({ children }) => {
     return () => subscription.unsubscribe();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        {" "}
+        <Loader />{" "}
+      </div>
+    );
 
   if (!session) {
     return <AuthModal />;

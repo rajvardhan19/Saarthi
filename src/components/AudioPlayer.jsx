@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { FaPlay, FaPause, FaStepForward, FaStepBackward } from "react-icons/fa";
 import supabase from "./supabaseClient";
+import Loader from "./Loader";
 
 const AudioPlayer = ({ selectedLanguage, userId }) => {
   const { chapterId } = useParams();
@@ -206,7 +207,11 @@ const AudioPlayer = ({ selectedLanguage, userId }) => {
   }, [userId, chapterId, isMarkedAsHeard]);
 
   if (!audioUrl) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (

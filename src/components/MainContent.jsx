@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import RecentlyRead from "./RecentlyRead";
+import Loader from "./Loader";
 
 const MainContent = ({ onProtectedAction, userId, selectedLanguage }) => {
   const [chapters, setChapters] = useState([]);
@@ -87,7 +88,11 @@ const MainContent = ({ onProtectedAction, userId, selectedLanguage }) => {
   }, [chapters, selectedLanguage]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   const visibleChapters = viewAll ? chapters : chapters.slice(0, 5);

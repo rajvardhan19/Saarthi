@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import AartiCard from "./AartiCard";
+import Loader from "./Loader";
 
 const Aarti = ({ userId }) => {
   const [aartis, setAartis] = useState([]);
@@ -32,7 +33,9 @@ const Aarti = ({ userId }) => {
         </div>
         <div className="aarti-list">
           {visibleAartis.length === 0 ? (
-            <p>No aartis found</p>
+            <p>
+              <Loader />
+            </p>
           ) : (
             visibleAartis.map((aarti) => (
               <AartiCard

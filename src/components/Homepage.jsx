@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import ChapterCard from "./ChapterCard";
 import ChapterCardAudiobook from "./ChapterCardAudiobook";
+import Loader from "./Loader";
 
 const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
   const [chapters, setChapters] = useState([]);
@@ -98,7 +99,11 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
   }, [audiobookChapters, selectedLanguage]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   const visibleChapters = viewAllChapters ? chapters : chapters.slice(0, 5);
@@ -134,7 +139,9 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
           ))}
         </div>
       ) : (
-        <div>No chapters found.</div>
+        <div>
+          <Loader />
+        </div>
       )}
       <div className="section-header">
         <h2>Audiobook Chapters</h2>
@@ -164,7 +171,9 @@ const Homepage = ({ onProtectedAction, userId, selectedLanguage }) => {
           ))}
         </div>
       ) : (
-        <div>No audiobook chapters found.</div>
+        <div>
+          <Loader />
+        </div>
       )}
     </div>
   );

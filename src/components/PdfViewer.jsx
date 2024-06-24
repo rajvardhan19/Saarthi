@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import supabase from "./supabaseClient";
+import Loader from "./Loader";
 
 const PdfViewer = ({ selectedLanguage, userId }) => {
   const { chapterId } = useParams();
@@ -87,7 +88,11 @@ const PdfViewer = ({ selectedLanguage, userId }) => {
   }, [userId, chapterId, isMarkedAsRead]);
 
   if (!pdfUrl) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
 
   return (

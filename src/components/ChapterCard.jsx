@@ -58,7 +58,11 @@ const ChapterCard = ({
         <div className="chapter-controls">
           <div className="chapter-title">{title}</div>
           <span className="favorite" onClick={handleLikeClick}>
-            {liked ? <FaHeart className="faheart" /> : <CiHeart />}
+            {liked ? (
+              <FaHeart className="faheart" size={20} />
+            ) : (
+              <CiHeart className="ciheart" size={24} />
+            )}
           </span>
         </div>
       </div>
