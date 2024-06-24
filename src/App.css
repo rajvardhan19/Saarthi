@@ -61,6 +61,18 @@ h2 {
   background-color: #fff;
   color: #000;
 }
+.dark-mode .current-time {
+  color: #fff;
+}
+.dark-mode .total-time {
+  color: #fff;
+}
+.dark-mode .back-button {
+  color: #fff;
+}
+.dark-mode .search-button {
+  color: #fff;
+}
 body,
 html {
   margin: 0;
@@ -76,17 +88,18 @@ html {
   overflow-y: auto; /* Enable scrolling within the homepage container */
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
+
 @media screen and (max-width: 768px) {
   .homepage-container {
     height: calc(
       100vh - 60px
     ); /* Adjust this value based on your header/footer height */
     margin: 0px 5px !important;
-    padding: 0px;
+    padding: 20px;
   }
   .box {
-    margin-left: 15px;
-    margin-right: 15px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
     height: 89vh !important;
   }
   .chatbot {
@@ -375,7 +388,11 @@ html {
 }
 
 .header-left {
+  display: flex;
   flex: 1;
+}
+.back-button {
+  margin-right: 1rem;
 }
 
 .header-user {
@@ -386,12 +403,13 @@ html {
   position: relative; /* Ensure dropdown positions correctly relative to this div */
 }
 
-.profile {
+/* .profile {
   height: 50px;
   width: 50px;
   border-radius: 50%;
   cursor: pointer;
-}
+  margin: 4px 0px;
+} */
 
 .dropdown-menu {
   position: absolute;
@@ -1277,4 +1295,18 @@ html {
 .login-button:disabled {
   cursor: not-allowed;
   opacity: 0.75;
+}
+.custom-class {
+  border-radius: 9999px; /* rounded-full */
+  padding: 0.5rem; /* p-2 */
+  background-color: white; /* bg-white */
+  display: flex; /* flex */
+  align-items: center; /* items-center */
+  justify-content: center; /* justify-center */
+  transition: all 150ms ease-in-out; /* transition */
+  margin: 4px 8px;
+}
+
+.custom-class:hover {
+  opacity: 0.75; /* hover:opacity-75 */
 }

@@ -49,7 +49,7 @@ const Sidebar = ({ onProtectedAction }) => {
 
           <NavLink
             to="/audiobook"
-            className="sidebar-item hide-on-mobile"
+            className="sidebar-item"
             activeClassName="active"
           >
             <MdOutlineAudiotrack className="sidebar-icon default" />
@@ -80,7 +80,7 @@ const Sidebar = ({ onProtectedAction }) => {
 
           <NavLink
             to="/liked"
-            className="sidebar-item"
+            className="sidebar-item hide-on-mobile"
             activeClassName="active"
             onClick={handleProtectedClick}
           >

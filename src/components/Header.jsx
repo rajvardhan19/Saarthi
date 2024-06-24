@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUser } from "react-icons/fa";
+import { IoChevronBack } from "react-icons/io5";
+import { IoIosHeart } from "react-icons/io";
 import LikedButton from "./LikedButton";
 
 const Header = ({
@@ -46,23 +48,36 @@ const Header = ({
     setIsDarkTheme(!isDarkTheme);
   };
 
+  const handleBackClick = () => {
+    navigate(-1); // This will navigate back to the previous page
+  };
+
+  const handleLikeClick = () => {
+    navigate("/liked");
+  };
+
   return (
     <div className="main-header">
       <div className="header">
         <div className="header-left">
+          <button onClick={handleBackClick} className="custom-class">
+            <IoChevronBack size={30} />
+          </button>
           {showLanguageDropdown && (
-            <FaSearch size={25} onClick={handleSearchClick} />
+            <button onClick={handleSearchClick} className="custom-class">
+              <FaSearch size={25} />
+            </button>
           )}
         </div>
         <div className="header-user">
           {session ? (
             <>
-              <img
-                src="/profile.png"
-                alt="profile"
-                className="profile"
-                onClick={toggleDropdown}
-              />
+              <button className="custom-class" onClick={handleLikeClick}>
+                <IoIosHeart size={30} />
+              </button>
+              <button onClick={toggleDropdown} className="custom-class">
+                <FaUser size={30} className="profile" />
+              </button>
               {isDropdownOpen && (
                 <div className="dropdown-menu">
                   <button onClick={toggleTheme}>
@@ -119,21 +134,24 @@ const Header = ({
               )}
             </>
           ) : (
-            <button className="login-button" onClick={onProtectedAction}>
-              Login
+            <button
+              className="custom-class login-button"
+              onClick={onProtectedAction}
+            >
+              <p>Login</p>
             </button>
           )}
         </div>
       </div>
       <div className="second-line">
-        {["/read-chapters", "/"].includes(location.pathname) && (
+        {["/read-chapters", "/", "/audiobook"].includes(location.pathname) && (
           <div className="header-title">Welcome Back</div>
         )}
       </div>
       <div>
-        {["/read-chapters", "/audiobook", "/", "/aartis"].includes(
-          location.pathname
-        ) && <LikedButton />}
+        {["/read-chapters", "/audiobook", "/"].includes(location.pathname) && (
+          <LikedButton />
+        )}
       </div>
     </div>
   );
