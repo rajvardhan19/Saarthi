@@ -1284,7 +1284,7 @@ html {
 }
 
 .text {
-  /* color: #000; */
+  color: #000;
   font-size: 16px;
   font-weight: 700; /* Equivalent to font-medium */
   white-space: nowrap; /* Equivalent to truncate */
@@ -1361,6 +1361,7 @@ html {
   opacity: 0.75;
 }
 .custom-class {
+  color: #000;
   border-radius: 9999px; /* rounded-full */
   padding: 0.5rem; /* p-2 */
   background-color: white; /* bg-white */
