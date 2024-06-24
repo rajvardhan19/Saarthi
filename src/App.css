@@ -73,6 +73,9 @@ h2 {
 .dark-mode .search-button {
   color: #fff;
 }
+.dark-mode .chatbot {
+  background-color: rgb(23, 23, 23);
+}
 body,
 html {
   margin: 0;
@@ -103,7 +106,7 @@ html {
     height: 89vh !important;
   }
   .chatbot {
-    height: 70vh !important;
+    height: 65vh !important;
   }
   .card {
     height: 90px !important;
@@ -855,12 +858,13 @@ html {
 .chatbot {
   position: relative;
   overflow: hidden; /* Ensures no overflow on the entire container */
-  height: 83vh; /* 83% of the viewport height */
+  height: 82vh; /* 83% of the viewport height */
   display: flex;
   flex-direction: column;
   max-width: 100%; /* Optional: add max-width for better layout control */
   margin: 0 auto; /* Center the chatbot */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Optional: add box shadow for better visual appearance */
+  background-color: #e2e2e2;
 }
 
 .chatbot-messages {
@@ -868,12 +872,6 @@ html {
   overflow-y: auto; /* Allow vertical overflow */
   padding: 10px;
   position: relative; /* Position relative to contain the ripple effect */
-  background-image: url("/chatbotbg.jpg");
-  background-color: #cccccc; /* Used if the image is unavailable */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  /* z-index: 1; Ensure messages are above the ripple */
 }
 
 .ripple {
@@ -975,7 +973,7 @@ html {
 .chatbot-input input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
+
   border-radius: 5px;
   margin-right: 10px;
 }
