@@ -2,69 +2,22 @@ import React, { useEffect, useState } from "react";
 import supabase from "./supabaseClient";
 import AartiCard from "./AartiCard";
 
-const Aarti = ({ userId, selectedLanguage }) => {
+const Aarti = ({ userId }) => {
   const [aartis, setAartis] = useState([]);
-  const [allAartis, setAllAartis] = useState([]);
   const [viewAll, setViewAll] = useState(false);
 
   useEffect(() => {
-    const fetchHindiAartis = async () => {
-      const { data, error } = await supabase.from("hindi_aartis").select("*");
+    const fetchAartis = async () => {
+      const { data, error } = await supabase.from("aartis").select("*");
       if (error) {
-        console.error("Error fetching hindi aartis:", error);
+        console.error("Error fetching aartis:", error);
       } else {
         setAartis(data);
       }
     };
 
-    fetchHindiAartis();
+    fetchAartis();
   }, []);
-
-  useEffect(() => {
-    if (viewAll) {
-      const fetchAllAartis = async () => {
-        const hindiAartis = await supabase.from("hindi_aartis").select("*");
-        const marathiAartis = await supabase.from("marathi_aartis").select("*");
-        const englishAartis = await supabase.from("aartis").select("*");
-
-        if (hindiAartis.error || marathiAartis.error || englishAartis.error) {
-          console.error(
-            "Error fetching aartis:",
-            hindiAartis.error,
-            marathiAartis.error,
-            englishAartis.error
-          );
-          return;
-        }
-
-        const combinedAartis = [
-          ...hindiAartis.data,
-          ...marathiAartis.data,
-          ...englishAartis.data,
-        ];
-
-        setAllAartis(combinedAartis);
-        setAartis(combinedAartis);
-      };
-
-      fetchAllAartis();
-    } else {
-      const fetchHindiAartis = async () => {
-        const { data, error } = await supabase.from("hindi_aartis").select("*");
-        if (error) {
-          console.error("Error fetching hindi aartis:", error);
-        } else {
-          setAartis(data);
-        }
-      };
-
-      fetchHindiAartis();
-    }
-  }, [viewAll]);
-
-  const handleViewAll = () => {
-    setViewAll(!viewAll);
-  };
 
   const visibleAartis = viewAll ? aartis : aartis.slice(0, 10);
 
@@ -72,8 +25,8 @@ const Aarti = ({ userId, selectedLanguage }) => {
     <div className="main-content-aarti">
       <div className="aartis-section">
         <div className="section-header-aarti">
-          <h2 className="aarti-header">Aartis</h2>
-          <button onClick={handleViewAll} className="view-all">
+          <h2>Aartis</h2>
+          <button onClick={() => setViewAll(!viewAll)}>
             {viewAll ? "Show Less" : "View All"}
           </button>
         </div>

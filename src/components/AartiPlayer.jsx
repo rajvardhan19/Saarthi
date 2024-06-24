@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaPlay, FaPause, FaStepBackward, FaStepForward } from "react-icons/fa";
 import supabase from "./supabaseClient";
 
-const AartiPlayer = ({ selectedLanguage }) => {
+const AartiPlayer = ({ userId }) => {
   const { aartiId } = useParams();
   const navigate = useNavigate();
   const audioRef = useRef(null);
@@ -15,68 +16,50 @@ const AartiPlayer = ({ selectedLanguage }) => {
   const [aartis, setAartis] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(null);
 
-  // Determine the table name based on selected language
-  const getTableName = () => {
-    switch (selectedLanguage) {
-      case "hindi":
-        return "hindi_aartis";
-      case "marathi":
-        return "marathi_aartis";
-      default:
-        return "aartis";
-    }
-  };
-
-  // Fetch aartis based on selected language
   useEffect(() => {
     const fetchAartis = async () => {
-      const tableName = getTableName();
-
-      const { data, error } = await supabase.from(tableName).select("*");
+      const { data, error } = await supabase.from("aartis").select("*");
       if (error) {
         console.error("Error fetching aartis:", error);
       } else {
         setAartis(data);
       }
     };
-
     fetchAartis();
-  }, [selectedLanguage]);
+  }, []);
 
-  // Fetch specific aarti based on aartiId and selected language
   useEffect(() => {
     const fetchAarti = async () => {
-      if (!aartis.length) return;
-
-      const tableName = getTableName();
-
+      console.log("Fetching aarti with id:", aartiId);
       const { data, error } = await supabase
-        .from(tableName)
+        .from("aartis")
         .select("*")
         .eq("id", aartiId)
         .single();
       if (error) {
         console.error("Error fetching aarti:", error);
       } else {
+        console.log("Fetched aarti:", data);
         setAarti(data);
-        setAudioUrl(data.aarti_url);
+        const publicUrl = data.aarti_url;
+        console.log("Fetched audio URL:", publicUrl);
+        setAudioUrl(publicUrl);
 
-        const index = aartis.findIndex((a) => a.id === data.id);
+        // Set currentIndex based on fetched aarti
+        const index = aartis.findIndex((aarti) => aarti.id === data.id);
         setCurrentIndex(index);
       }
     };
-
     fetchAarti();
-  }, [aartiId, aartis, selectedLanguage]);
+  }, [aartiId, aartis]);
 
-  // Update audio source when audioUrl changes
   useEffect(() => {
     if (audioUrl) {
+      console.log("Setting audio URL:", audioUrl);
       audioRef.current.src = audioUrl;
     }
   }, [audioUrl]);
 
-  // Control play/pause state of audio
   useEffect(() => {
     if (isPlaying && audioRef.current) {
       audioRef.current.play();
@@ -85,7 +68,6 @@ const AartiPlayer = ({ selectedLanguage }) => {
     }
   }, [isPlaying]);
 
-  // Handle audio events
   useEffect(() => {
     const audio = audioRef.current;
 
@@ -127,14 +109,14 @@ const AartiPlayer = ({ selectedLanguage }) => {
   const handlePrevious = () => {
     if (currentIndex > 0) {
       const previousAarti = aartis[currentIndex - 1];
-      navigate(`/aarti/${previousAarti.id}`);
+      navigate(`/aartis/${previousAarti.id}`);
     }
   };
 
   const handleNext = () => {
     if (currentIndex < aartis.length - 1) {
       const nextAarti = aartis[currentIndex + 1];
-      navigate(`/aarti/${nextAarti.id}`);
+      navigate(`/aartis/${nextAarti.id}`);
     }
   };
 

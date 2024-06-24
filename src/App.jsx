@@ -161,6 +161,7 @@ const App = () => {
                   />
                 }
               />
+              <Route path="/aartis/:aartiId" element={<AartiPlayer />} />
             </Routes>
           </div>
         </div>
