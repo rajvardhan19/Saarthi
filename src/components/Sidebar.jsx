@@ -65,7 +65,7 @@ const Sidebar = ({ onProtectedAction }) => {
           >
             <IoChatboxEllipsesOutline className="sidebar-icon default" />
             <IoChatboxEllipses className="sidebar-icon active-icon" />
-            Saarthi Chatbot
+            Saarthi
           </NavLink>
 
           <NavLink
@@ -85,7 +85,7 @@ const Sidebar = ({ onProtectedAction }) => {
             onClick={handleProtectedClick}
           >
             <IoIosHeartEmpty className="sidebar-icon default" />
-            <IoIosHeart className="sidebar-icon active-icon" />
+            <IoIosHeart className="sidebar-icon active-icon iosheart" />
             Liked
           </NavLink>
         </div>

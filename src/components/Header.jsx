@@ -73,7 +73,7 @@ const Header = ({
           {session ? (
             <>
               <button className="custom-class" onClick={handleLikeClick}>
-                <IoIosHeart size={30} />
+                <IoIosHeart className="iosheart" size={30} />
               </button>
               <button onClick={toggleDropdown} className="custom-class">
                 <FaUser size={30} className="profile" />

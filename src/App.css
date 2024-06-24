@@ -83,6 +83,15 @@ html {
   height: 100%;
   overflow: hidden; /* Prevent the body from scrolling */
 }
+.view-all {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
 
 .homepage-container {
   padding: 20px;
@@ -96,7 +105,7 @@ html {
   border: 1px solid #ddd; /* Soft border */
   border-radius: 10px; /* Rounded corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  padding: 20px; /* Internal padding for spacing */
+  padding: 0px; /* Internal padding for spacing */
   width: 150px; /* Limit width for mobile responsiveness */
   margin: 10px auto; /* Center alignment */
 }
@@ -111,13 +120,13 @@ html {
 
 .theme p,
 .language-dpd p {
-  margin: 0 0 10px 0; /* Space below the labels */
+  margin: 0px 0 3px 0;
   font-weight: bold; /* Bold labels */
 }
 
 .theme-button,
 .logout-button {
-  margin: 5px 0; /* Margin for top and bottom */
+  margin: 0; /* Margin for top and bottom */
   width: 100%; /* Full width for buttons */
   padding: 10px; /* Padding for buttons */
   border: none; /* Remove default border */
@@ -134,7 +143,7 @@ html {
 }
 
 .dropdown {
-  margin: 10px 0; /* Margin for top and bottom */
+  margin: 2px 0; /* Margin for top and bottom */
   height: 40px; /* Fixed height */
   width: 100%; /* Full width */
   background: #fff; /* White background */
@@ -146,6 +155,26 @@ html {
 }
 
 @media (max-width: 768px) {
+  .login-button {
+    width: 100% !important;
+    border-radius: 5rem !important;
+  }
+  .header-user {
+    width: 33% !important;
+  }
+  .chapters-audiobook {
+    margin-left: 0px !important;
+  }
+  .main-content-audiobook {
+    margin: 0px 5px !important;
+  }
+  .recently-heard-section {
+    margin-left: 0px !important;
+  }
+  .liked-container {
+    padding: 20px !important;
+    margin: 0px 5px !important;
+  }
   .dropdown-menu {
     padding: 15px; /* Less padding on smaller screens */
     width: 120px !important;
@@ -371,12 +400,12 @@ html {
 /* Styles for smaller screens */
 @media (max-width: 768px) {
   .sidebar {
-    width: 95%;
+    width: 100%;
     height: 8vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0px 10px;
+    padding: 0px;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -391,12 +420,8 @@ html {
   .sidebar-header {
     display: none;
   }
-  /* Add this CSS to your styles */
-
-  @media (max-width: 768px) {
-    .hide-on-mobile {
-      display: none !important;
-    }
+  .hide-on-mobile {
+    display: none !important;
   }
 
   .sidebar-item-container {
@@ -417,6 +442,7 @@ html {
 
   .sidebar-item {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     padding: 5px;
@@ -447,7 +473,6 @@ html {
     display: none;
   }
 }
-
 .main-header {
   height: fit-content;
   background: linear-gradient(to bottom, #b45309, #e2e2e2);
@@ -475,7 +500,7 @@ html {
 .header-user {
   display: flex;
   justify-content: flex-end;
-  width: 25%;
+  width: 35%;
   margin-right: 0;
   position: relative; /* Ensure dropdown positions correctly relative to this div */
 }
@@ -561,7 +586,12 @@ html {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
-
+.faheart {
+  color: rgb(166, 60, 77);
+}
+.iosheart {
+  color: rgb(166, 60, 77);
+}
 .chapter-image {
   width: 100%;
   height: 100%;
@@ -1369,7 +1399,8 @@ html {
   align-items: center; /* items-center */
   justify-content: center; /* justify-center */
   transition: all 150ms ease-in-out; /* transition */
-  margin: 4px 8px;
+  margin: 4px 0px;
+  margin-right: 8px;
 }
 
 .custom-class:hover {
