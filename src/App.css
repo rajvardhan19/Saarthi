@@ -1278,6 +1278,10 @@ html {
     font-size: 12px;
     width: 120px;
   }
+  .search-results {
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .button:hover {
