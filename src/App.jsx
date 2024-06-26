@@ -8,6 +8,7 @@ import AudioBook from "./components/AudioBook";
 import Chatbot from "./components/Chatbot";
 import AudioPlayer from "./components/AudioPlayer";
 import SearchPage from "./components/SearchPage";
+import SearchPageAarti from "./components/SearchPageAarti";
 import SearchPageAudiobook from "./components/SearchPageAudiobook";
 import Liked from "./components/Liked";
 import AuthModal from "./components/AuthModal";
@@ -150,6 +151,12 @@ const App = () => {
                     userId={session?.user?.id}
                     selectedLanguage={selectedLanguage}
                   />
+                }
+              />
+              <Route
+                path="/search-aarti"
+                element={
+                  <SearchPageAarti selectedLanguage={selectedLanguage} />
                 }
               />
               <Route

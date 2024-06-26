@@ -76,6 +76,9 @@ h2 {
 .dark-mode .chatbot {
   background-color: rgb(23, 23, 23);
 }
+.dark-mode .search-result-title {
+  color: #fff;
+}
 body,
 html {
   margin: 0;
@@ -284,10 +287,13 @@ html {
     ) !important; /* 1 column on very small screens */
   }
   .aarti-list {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   .aarti-card {
-    margin-left: 85px !important;
+    margin-left: 0px !important;
+    padding: 0px !important;
+    margin: 5px !important;
+    width: 162px !important;
   }
   .chapter-card,
   .chapter-card-audiobook {
@@ -535,19 +541,6 @@ html {
   font-size: 24px;
   font-weight: bold;
   /* color: #000; */
-}
-
-.login-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
 }
 
 .header-search {
@@ -1186,18 +1179,13 @@ html {
 
 .search-result-info {
   font-size: 14px;
+  width: 200px;
 }
 
 .search-result-title {
   font-weight: bold;
 }
 
-.login-button {
-  margin: 5px;
-  padding: 10px;
-  border-radius: 12px;
-  width: 80px;
-}
 .auth-modal {
   position: fixed;
   top: 0;
@@ -1286,6 +1274,10 @@ html {
   .dropdown-menu {
     width: 72px;
   }
+  .search-result-info {
+    font-size: 12px;
+    width: 120px;
+  }
 }
 
 .button:hover {
@@ -1368,27 +1360,22 @@ html {
   opacity: 0.75;
 }
 .login-button {
-  width: 25%;
-  border-radius: 9999px; /* full rounded */
+  width: 33%;
+  height: 50px;
+  border-radius: 9999px; /* Full rounded corners */
   border: 1px solid transparent;
   cursor: pointer;
-  opacity: 1;
   color: black;
   font-weight: bold;
+  transition: opacity 0.3s; /* Smooth transition for opacity change */
   background-color: white;
-  padding: 0.5rem 1.5rem; /* px-6 py-2 */
-  transition: opacity 0.3s ease;
-  margin-right: 0px;
+  /* padding: 0.5rem 1.5rem; Equivalent to px-6 py-2 */
 }
 
 .login-button:hover {
   opacity: 0.75;
 }
 
-.login-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.75;
-}
 .custom-class {
   color: #000;
   border-radius: 9999px; /* rounded-full */

@@ -35,6 +35,8 @@ const Header = ({
   const handleSearchClick = () => {
     if (location.pathname === "/audiobook") {
       navigate("/search-audiobook");
+    } else if (location.pathname === "/aartis") {
+      navigate("/search-aarti");
     } else {
       navigate("/search");
     }
@@ -144,11 +146,8 @@ const Header = ({
               )}
             </>
           ) : (
-            <button
-              className="custom-class login-button"
-              onClick={onProtectedAction}
-            >
-              <p>Login</p>
+            <button className="login-button" onClick={onProtectedAction}>
+              <h3>Login</h3>
             </button>
           )}
         </div>

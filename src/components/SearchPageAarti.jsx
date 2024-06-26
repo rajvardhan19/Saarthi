@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import supabase from "./supabaseClient";
 import { useNavigate } from "react-router-dom";
 
-const SearchPageAudiobook = ({ selectedLanguage }) => {
+const SearchPageAarti = ({ selectedLanguage }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
@@ -14,9 +14,9 @@ const SearchPageAudiobook = ({ selectedLanguage }) => {
         return;
       }
       const { data, error } = await supabase
-        .from("chapters")
+        .from("aartis")
         .select("*")
-        .ilike("title", `%${searchTerm}%`);
+        .ilike("aarti", `%${searchTerm}%`);
 
       if (error) {
         console.error("Error fetching search results:", error);
@@ -32,30 +32,15 @@ const SearchPageAudiobook = ({ selectedLanguage }) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleResultClick = (chapterId) => {
-    navigate(`/audio/${chapterId}?language=${selectedLanguage}`);
-  };
-
-  const getImageUrl = (chapterId) => {
-    const language = selectedLanguage === "english" ? "" : selectedLanguage;
-    const filename = `${language}chapter${chapterId}.png`;
-
-    const { data, error } = supabase.storage
-      .from("audiobook_images")
-      .getPublicUrl(filename);
-
-    if (error) {
-      console.error(`Error fetching image URL for ${filename}:`, error);
-    }
-
-    return data ? data.publicUrl : "";
+  const handleResultClick = (aartiId) => {
+    navigate(`/aarti/${aartiId}`);
   };
 
   return (
     <div className="search-page">
       <input
         type="text"
-        placeholder="Search for audio chapters..."
+        placeholder="Search for aartis..."
         value={searchTerm}
         onChange={handleSearchChange}
         className="search-input"
@@ -68,12 +53,12 @@ const SearchPageAudiobook = ({ selectedLanguage }) => {
             onClick={() => handleResultClick(result.id)}
           >
             <img
-              src={getImageUrl(result.id)}
-              alt={result.title}
+              src={result.aarti_image_url}
+              alt={result.aarti}
               className="search-result-image"
             />
             <div className="search-result-info">
-              <div className="search-result-title">{result.title}</div>
+              <div className="search-result-title">{result.aarti}</div>
             </div>
           </div>
         ))}
@@ -82,4 +67,4 @@ const SearchPageAudiobook = ({ selectedLanguage }) => {
   );
 };
 
-export default SearchPageAudiobook;
+export default SearchPageAarti;
