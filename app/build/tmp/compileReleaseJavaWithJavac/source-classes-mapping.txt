@@ -1,0 +1,8 @@
+in/icespace/saarthi/twa/Application.java
+ in.icespace.saarthi.twa.Application
+in/icespace/saarthi/twa/LauncherActivity.java
+ in.icespace.saarthi.twa.LauncherActivity
+in/icespace/saarthi/twa/BuildConfig.java
+ in.icespace.saarthi.twa.BuildConfig
+in/icespace/saarthi/twa/DelegationService.java
+ in.icespace.saarthi.twa.DelegationService

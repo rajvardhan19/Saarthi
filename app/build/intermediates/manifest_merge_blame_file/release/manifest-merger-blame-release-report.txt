@@ -1,0 +1,358 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!--
+3    Copyright 2019 Google Inc. All Rights Reserved.
+4
+5     Licensed under the Apache License, Version 2.0 (the "License");
+6     you may not use this file except in compliance with the License.
+7     You may obtain a copy of the License at
+8
+9         http://www.apache.org/licenses/LICENSE-2.0
+10
+11     Unless required by applicable law or agreed to in writing, software
+12     distributed under the License is distributed on an "AS IS" BASIS,
+13     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+14     See the License for the specific language governing permissions and
+15     limitations under the License.
+16-->
+17<!--
+18 The "package" attribute is rewritten by the Gradle build with the value of applicationId.
+19     It is still required here, as it is used to derive paths, for instance when referring
+20     to an Activity by ".MyActivity" instead of the full name. If more Activities are added to the
+21     application, the package attribute will need to reflect the correct path in order to use
+22     the abbreviated format.
+23-->
+24<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+25    package="in.icespace.saarthi.twa"
+26    android:versionCode="1"
+27    android:versionName="1" >
+28
+29    <uses-sdk
+30        android:minSdkVersion="19"
+30-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml
+31        android:targetSdkVersion="33" />
+31-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml
+32
+33    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+33-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:26:9-80
+33-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:26:26-78
+34
+35    <queries>
+35-->[com.google.androidbrowserhelper:androidbrowserhelper:2.5.0] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\816850808f9de9e670a4838cd1f96218\androidbrowserhelper-2.5.0\AndroidManifest.xml:26:5-34:15
+36        <intent>
+36-->[com.google.androidbrowserhelper:androidbrowserhelper:2.5.0] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\816850808f9de9e670a4838cd1f96218\androidbrowserhelper-2.5.0\AndroidManifest.xml:27:9-33:18
+37            <action android:name="android.intent.action.VIEW" />
+37-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:137:17-68
+37-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:137:25-66
+38
+39            <category android:name="android.intent.category.BROWSABLE" />
+39-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:139:17-77
+39-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:139:27-75
+40
+41            <data android:scheme="https" />
+41-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:140:17-141:54
+41-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:140:23-45
+42        </intent>
+43        <intent>
+43-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:17:9-19:18
+44            <action android:name="com.android.vending.billing.InAppBillingService.BIND" />
+44-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:18:13-91
+44-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:18:21-88
+45        </intent>
+46    </queries>
+47
+48    <uses-permission android:name="com.android.vending.BILLING" />
+48-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:10:5-67
+48-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:10:22-64
+49
+50    <application
+50-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:35:5-209:19
+51        android:name="in.icespace.saarthi.twa.Application"
+51-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:36:9-35
+52        android:allowBackup="true"
+52-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:37:9-35
+53        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+53-->[androidx.core:core:1.1.0] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\e601daed4ba62929db8b322b2974c8f8\core-1.1.0\AndroidManifest.xml:24:18-86
+54        android:icon="@mipmap/ic_launcher"
+54-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:38:9-43
+55        android:label="@string/appName"
+55-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:39:9-40
+56        android:manageSpaceActivity="com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity"
+56-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:41:9-105
+57        android:supportsRtl="true"
+57-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:43:9-35
+58        android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+58-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:44:9-68
+59        <meta-data
+59-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:46:9-48:58
+60            android:name="asset_statements"
+60-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:47:13-44
+61            android:resource="@string/assetStatements" />
+61-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:48:13-55
+62        <meta-data
+62-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:51:13-53:58
+63            android:name="web_manifest_url"
+63-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:52:17-48
+64            android:value="@string/webManifestUrl" />
+64-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:53:17-55
+65        <meta-data
+65-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:56:9-58:52
+66            android:name="twa_generator"
+66-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:57:13-41
+67            android:value="@string/generatorApp" />
+67-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:58:13-49
+68
+69        <activity android:name="com.google.androidbrowserhelper.trusted.ManageDataLauncherActivity" >
+69-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:65:13-69:24
+69-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:65:23-104
+70            <meta-data
+70-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:66:13-68:53
+71                android:name="android.support.customtabs.trusted.MANAGE_SPACE_URL"
+71-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:67:17-83
+72                android:value="@string/launchUrl" />
+72-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:68:17-50
+73        </activity>
+74        <activity
+74-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:72:9-145:20
+75            android:name="in.icespace.saarthi.twa.LauncherActivity"
+75-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:72:19-50
+76            android:alwaysRetainTaskState="true"
+76-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:73:13-49
+77            android:exported="true"
+77-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:75:13-36
+78            android:label="@string/launcherName" >
+78-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:74:13-49
+79            <meta-data
+79-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:76:13-77:53
+80                android:name="android.support.customtabs.trusted.DEFAULT_URL"
+80-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:76:24-85
+81                android:value="@string/launchUrl" />
+81-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:77:17-50
+82            <meta-data
+82-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:79:13-81:58
+83                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR"
+83-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:80:17-83
+84                android:resource="@color/colorPrimary" />
+84-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:81:17-55
+85            <meta-data
+85-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:83:13-85:62
+86                android:name="android.support.customtabs.trusted.STATUS_BAR_COLOR_DARK"
+86-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:84:17-88
+87                android:resource="@color/colorPrimaryDark" />
+87-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:85:17-59
+88            <meta-data
+88-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:87:13-89:61
+89                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR"
+89-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:88:17-87
+90                android:resource="@color/navigationColor" />
+90-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:89:17-58
+91            <meta-data
+91-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:91:13-93:65
+92                android:name="android.support.customtabs.trusted.NAVIGATION_BAR_COLOR_DARK"
+92-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:92:17-92
+93                android:resource="@color/navigationColorDark" />
+93-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:93:17-62
+94            <meta-data
+94-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:95:13-97:68
+95                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR"
+95-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:96:17-84
+96                android:resource="@color/navigationDividerColor" />
+96-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:97:17-65
+97            <meta-data
+97-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:99:13-101:72
+98                android:name="androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR_DARK"
+98-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:100:17-89
+99                android:resource="@color/navigationDividerColorDark" />
+99-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:101:17-69
+100            <meta-data
+100-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:103:13-104:54
+101                android:name="android.support.customtabs.trusted.SPLASH_IMAGE_DRAWABLE"
+101-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:103:24-95
+102                android:resource="@drawable/splash" />
+102-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:104:17-52
+103            <meta-data
+103-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:106:13-107:60
+104                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_BACKGROUND_COLOR"
+104-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:106:24-104
+105                android:resource="@color/backgroundColor" />
+105-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:107:17-58
+106            <meta-data
+106-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:109:13-110:71
+107                android:name="android.support.customtabs.trusted.SPLASH_SCREEN_FADE_OUT_DURATION"
+107-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:109:24-105
+108                android:value="@integer/splashScreenFadeOutDuration" />
+108-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:110:17-69
+109            <meta-data
+109-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:112:13-113:60
+110                android:name="android.support.customtabs.trusted.FILE_PROVIDER_AUTHORITY"
+110-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:112:24-97
+111                android:value="@string/providerAuthority" />
+111-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:113:17-58
+112            <meta-data
+112-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:115:13-97
+113                android:name="android.app.shortcuts"
+113-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:115:24-60
+114                android:resource="@xml/shortcuts" />
+114-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:115:61-94
+115            <meta-data
+115-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:117:13-118:56
+116                android:name="android.support.customtabs.trusted.FALLBACK_STRATEGY"
+116-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:117:24-91
+117                android:value="@string/fallbackType" />
+117-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:118:17-53
+118            <meta-data
+118-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:124:13-125:54
+119                android:name="android.support.customtabs.trusted.SCREEN_ORIENTATION"
+119-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:124:24-92
+120                android:value="@string/orientation" />
+120-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:125:17-52
+121
+122            <intent-filter>
+122-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:131:13-134:29
+123                <action android:name="android.intent.action.MAIN" />
+123-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:132:17-69
+123-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:132:25-66
+124
+125                <category android:name="android.intent.category.LAUNCHER" />
+125-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:133:17-77
+125-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:133:27-74
+126            </intent-filter>
+127            <intent-filter android:autoVerify="true" >
+127-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:136:13-142:29
+127-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:136:28-53
+128                <action android:name="android.intent.action.VIEW" />
+128-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:137:17-68
+128-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:137:25-66
+129
+130                <category android:name="android.intent.category.DEFAULT" />
+130-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:138:17-76
+130-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:138:27-73
+131                <category android:name="android.intent.category.BROWSABLE" />
+131-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:139:17-77
+131-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:139:27-75
+132
+133                <data
+133-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:140:17-141:54
+134                    android:host="@string/hostName"
+134-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:141:21-52
+135                    android:scheme="https" />
+135-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:140:23-45
+136            </intent-filter>
+137        </activity>
+138        <activity android:name="com.google.androidbrowserhelper.trusted.FocusActivity" />
+138-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:147:9-90
+138-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:147:19-87
+139        <activity
+139-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:149:9-150:62
+140            android:name="com.google.androidbrowserhelper.trusted.WebViewFallbackActivity"
+140-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:149:19-97
+141            android:configChanges="orientation|screenSize" />
+141-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:150:13-59
+142
+143        <provider
+143-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:152:9-160:20
+144            android:name="androidx.core.content.FileProvider"
+144-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:153:13-62
+145            android:authorities="@string/providerAuthority"
+145-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:154:13-60
+146            android:exported="false"
+146-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:156:13-37
+147            android:grantUriPermissions="true" >
+147-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:155:13-47
+148            <meta-data
+148-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:157:13-159:53
+149                android:name="android.support.FILE_PROVIDER_PATHS"
+149-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:158:17-67
+150                android:resource="@xml/filepaths" />
+150-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:159:17-50
+151        </provider>
+152
+153        <service
+153-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:162:9-177:19
+154            android:name="in.icespace.saarthi.twa.DelegationService"
+154-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:163:13-46
+155            android:enabled="@bool/enableNotification"
+155-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:164:13-55
+156            android:exported="@bool/enableNotification" >
+156-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:165:13-56
+157            <meta-data
+157-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:168:17-170:73
+158                android:name="android.support.customtabs.trusted.SMALL_ICON"
+158-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:169:21-81
+159                android:resource="@drawable/ic_notification_icon" />
+159-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:170:21-70
+160
+161            <intent-filter>
+161-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:173:13-176:29
+162                <action android:name="android.support.customtabs.trusted.TRUSTED_WEB_ACTIVITY_SERVICE" />
+162-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:174:17-105
+162-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:174:25-103
+163
+164                <category android:name="android.intent.category.DEFAULT" />
+164-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:138:17-76
+164-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:138:27-73
+165            </intent-filter>
+166        </service>
+167
+168        <activity android:name="com.google.androidbrowserhelper.trusted.NotificationPermissionRequestActivity" />
+168-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:180:13-118
+168-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:180:23-115
+169        <activity
+169-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:185:9-198:20
+170            android:name="com.google.androidbrowserhelper.playbilling.provider.PaymentActivity"
+170-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:186:13-96
+171            android:configChanges="keyboardHidden|keyboard|orientation|screenLayout|screenSize"
+171-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:188:13-96
+172            android:exported="true"
+172-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:189:13-36
+173            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+173-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:187:13-72
+174            <intent-filter>
+174-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:191:13-193:29
+175                <action android:name="org.chromium.intent.action.PAY" />
+175-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:192:17-73
+175-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:192:25-70
+176            </intent-filter>
+177
+178            <meta-data
+178-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:195:13-197:67
+179                android:name="org.chromium.default_payment_method_name"
+179-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:196:17-72
+180                android:value="https://play.google.com/billing" />
+180-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:197:17-64
+181        </activity>
+182
+183        <!-- This service checks who calls it at runtime. -->
+184        <service
+184-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:201:9-207:19
+185            android:name="com.google.androidbrowserhelper.playbilling.provider.PaymentService"
+185-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:202:13-95
+186            android:exported="true" >
+186-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:203:13-36
+187            <intent-filter>
+187-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:204:13-206:29
+188                <action android:name="org.chromium.intent.action.IS_READY_TO_PAY" />
+188-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:205:17-85
+188-->C:\Users\Jaspreet\Desktop\VRNEX\saarthi main\Saarthi\app\src\main\AndroidManifest.xml:205:25-82
+189            </intent-filter>
+190        </service>
+191
+192        <meta-data
+192-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:23:9-25:37
+193            android:name="com.google.android.play.billingclient.version"
+193-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:24:13-73
+194            android:value="5.2.1" />
+194-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:25:13-34
+195
+196        <activity
+196-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:27:9-31:75
+197            android:name="com.android.billingclient.api.ProxyBillingActivity"
+197-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:28:13-78
+198            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+198-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:29:13-96
+199            android:exported="false"
+199-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:30:13-37
+200            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+200-->[com.android.billingclient:billing:5.2.1] C:\Users\Jaspreet\.gradle\caches\transforms-2\files-2.1\b38f969dab5c30614ce3735f3d491e2a\billing-5.2.1\AndroidManifest.xml:31:13-72
+201    </application>
+202
+203</manifest>

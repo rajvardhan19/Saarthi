@@ -100,7 +100,7 @@ html {
   padding: 20px;
   margin: 0px 15px;
   height: 100%; /* Make the homepage container take full height of the box */
-  overflow-y: auto; /* Enable scrolling within the homepage container */
+
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 .dropdown-menu {
