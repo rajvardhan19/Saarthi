@@ -80,7 +80,7 @@ const ChapterCardAudiobook = ({
           <div className="chapter-title-audiobook">{title}</div>
           <span className="favorite-audiobook" onClick={handleLikeClick}>
             {liked ? (
-              <FaHeart className="faheart" size={18.5} />
+              <FaHeart className="faheart" size={20} />
             ) : (
               <CiHeart className="ciheart" size={24} />
             )}
