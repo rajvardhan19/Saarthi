@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { IoChevronBack } from "react-icons/io5";
@@ -14,6 +14,7 @@ const Header = ({
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
   const showLanguageDropdown = [
     "/audiobook",
     "/read-chapters",
@@ -27,6 +28,26 @@ const Header = ({
   useEffect(() => {
     document.body.classList.toggle("dark-mode", isDarkTheme);
   }, [isDarkTheme]);
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    const handleRouteChange = () => {
+      setIsDropdownOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    window.addEventListener("popstate", handleRouteChange);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      window.removeEventListener("popstate", handleRouteChange);
+    };
+  }, []);
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
@@ -81,7 +102,7 @@ const Header = ({
                 <FaUser size={30} className="profile" />
               </button>
               {isDropdownOpen && (
-                <div className="dropdown-menu">
+                <div className="dropdown-menu" ref={dropdownRef}>
                   <div className="theme">
                     <p>Theme:</p>
                     <button onClick={toggleTheme} className="theme-button">

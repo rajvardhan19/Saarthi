@@ -300,7 +300,16 @@ html {
     width: 162px !important;
   }
 }
-
+@media screen and (max-width: 375px) {
+  .chapter-card,
+  .chapter-card-audiobook {
+    width: 132px !important;
+    height: 172px !important;
+  }
+  .aarti-card {
+    width: 132px !important;
+  }
+}
 .main {
   flex: 1;
   display: flex;
@@ -1054,7 +1063,7 @@ html {
 }
 
 .chatbot-input {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   padding: 10px;
   /* border-top: 1px solid #ccc; */
@@ -1062,24 +1071,32 @@ html {
   border-radius: 0.5rem;
   /* z-index: 1; */
 }
-
+.textbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .chatbot-input input {
   flex: 1;
   padding: 10px;
-
   border-radius: 5px;
   margin-right: 10px;
 }
 
 .chatbot-input button {
   padding: 10px 20px;
-  margin-right: 5px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
+  background-color: #666565;
   color: white;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin: 10px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chatbot-input button:disabled {
@@ -1088,7 +1105,7 @@ html {
 }
 
 .chatbot-input button:hover:not(:disabled) {
-  background-color: #0056b3;
+  opacity: 0.75;
 }
 
 /* Pdf Viewer */
@@ -1229,6 +1246,9 @@ html {
   flex: 1;
   padding: 5px;
   font-size: 1em;
+}
+.auth-modal-content button {
+  margin-top: 15px;
 }
 
 /* LIKED BUTTON */

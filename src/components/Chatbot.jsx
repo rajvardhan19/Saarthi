@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Speech from "speak-tts";
 import { marked } from "marked";
+import { useLocation } from "react-router-dom";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -9,64 +10,73 @@ const Chatbot = () => {
   const [generatingAnswer, setGeneratingAnswer] = useState(false);
   const [rippleActive, setRippleActive] = useState(false);
   const [showCards, setShowCards] = useState(true);
-  const [isSpeechActive, setIsSpeechActive] = useState(true); // New state for toggling speech
+  const [isSpeechActive, setIsSpeechActive] = useState(true);
 
+  const location = useLocation();
   const speech = new Speech();
+
   useEffect(() => {
-    if (speech.hasBrowserSupport()) {
-      speech
-        .init({
-          volume: 1,
-          lang: "en-IN",
-          rate: 1,
-          pitch: 1,
-          voice: "Google UK English Female", // Adjust the voice name to an Indian English option if available
-          splitSentences: true,
-        })
-        .then((data) => {
-          console.log("Speech is ready", data);
-          // You may need to find the exact name of the Indian English voice available in the browser
+    const initializeSpeech = async () => {
+      if (speech.hasBrowserSupport()) {
+        try {
+          await speech.init({
+            volume: 1,
+            lang: "en-IN",
+            rate: 1,
+            pitch: 1,
+            voice: "Google UK English Female",
+            splitSentences: true,
+          });
+
           const voices = speech.voices();
-          const indianVoice = voices.find(
-            (voice) => voice.name.includes("Google UK English Female") // Adjust as needed
+          const indianVoice = voices.find((voice) =>
+            voice.name.includes("Google UK English Female")
           );
           if (indianVoice) {
             speech.setVoice(indianVoice.name);
           }
-        })
-        .catch((e) => {
-          console.error("An error occurred while initializing: ", e);
-        });
+          console.log("Speech is ready");
+        } catch (error) {
+          console.error("An error occurred while initializing speech: ", error);
+        }
+      }
+    };
+
+    if (location.pathname === "/chatbot") {
+      initializeSpeech();
+      setIsSpeechActive(true);
+    } else {
+      speech.cancel();
+      setIsSpeechActive(false);
     }
-  }, []);
+
+    return () => {
+      speech.cancel();
+      setIsSpeechActive(false);
+    };
+  }, [location]);
 
   const handleSendMessage = async (messageText) => {
     const text = messageText || input;
     if (text.trim() === "") return;
 
-    // Add the user's message to the message list
     const userMessage = { sender: "user", text: text };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
 
-    // Trigger ripple effect
     setRippleActive(true);
-    setTimeout(() => setRippleActive(false), 4000); // Adjust timing to match animation duration
+    setTimeout(() => setRippleActive(false), 4000);
 
-    // Hide the card container
     setShowCards(false);
 
-    // Prepare the message to be sent to Gemini
     const enhancedMessage =
       text +
       "\n" +
       " Give me an answer based on the teachings of Bhagvat Geeta. If you were my guru what would you tell me? Also discuss some strategy to navigate through this problem.";
 
-    // Define the request payload
     const payload = {
       contents: [{ parts: [{ text: enhancedMessage }] }],
     };
 
-    // Make a request to Gemini
     setGeneratingAnswer(true);
     try {
       const response = await axios({
@@ -87,9 +97,7 @@ const Chatbot = () => {
           sender: "gemini",
           text: response.data.candidates[0].content.parts[0].text,
         };
-        // Add Gemini's response to the message list
         setMessages((prevMessages) => [...prevMessages, geminiMessage]);
-        // Read the response aloud if speech is active
         if (isSpeechActive) {
           speech.speak({ text: geminiMessage.text });
         }
@@ -106,13 +114,11 @@ const Chatbot = () => {
           text: errorMessage,
         },
       ]);
-      // Read the error message aloud if speech is active
       if (isSpeechActive) {
         speech.speak({ text: errorMessage });
       }
     }
     setGeneratingAnswer(false);
-    // Clear the input field
     setInput("");
   };
 
@@ -163,19 +169,26 @@ const Chatbot = () => {
         ))}
       </div>
       <div className="chatbot-input">
-        <input
-          type="text"
-          placeholder="Type a message..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          disabled={generatingAnswer}
-        />
-        <button onClick={() => handleSendMessage()} disabled={generatingAnswer}>
-          {generatingAnswer ? "Sending..." : "Send"}
-        </button>
-        <button onClick={toggleSpeech}>
-          {isSpeechActive ? "Stop Listening" : "Start Listening"}
-        </button>
+        <div className="textbox">
+          <input
+            type="text"
+            placeholder="Type a message..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            disabled={generatingAnswer}
+          />
+        </div>
+        <div className="button-container">
+          <button
+            onClick={() => handleSendMessage()}
+            disabled={generatingAnswer}
+          >
+            {generatingAnswer ? "Sending..." : "Send"}
+          </button>
+          <button onClick={toggleSpeech}>
+            {isSpeechActive ? "Stop Listening" : "Start Listening"}
+          </button>
+        </div>
       </div>
     </div>
   );

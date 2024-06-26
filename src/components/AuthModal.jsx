@@ -80,7 +80,11 @@ const AuthModal = ({ onClose }) => {
               onChange={(e) => setOtp(e.target.value)}
               placeholder="Enter the OTP"
             />
-            <button onClick={handleVerifyOtp} disabled={loading}>
+            <button
+              onClick={handleVerifyOtp}
+              disabled={loading}
+              className="otp"
+            >
               {loading ? "Verifying..." : "Verify OTP"}
             </button>
             {error && <p className="error">{error}</p>}
