@@ -60,7 +60,7 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
 
     fetchLikedChapters();
     fetchRecentlyHeard();
-  }, [onProtectedAction, userId]);
+  }, [userId]);
 
   useEffect(() => {
     const fetchChapterImages = async () => {

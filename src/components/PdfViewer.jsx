@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import supabase from "./supabaseClient";
 import Loader from "./Loader";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 const PdfViewer = ({ selectedLanguage, userId }) => {
   const { chapterId } = useParams();
@@ -34,7 +37,6 @@ const PdfViewer = ({ selectedLanguage, userId }) => {
       try {
         console.log(`Marking chapter ${chapterId} as read for user ${userId}`);
 
-        // Check if the entry already exists
         const { data: existingEntries, error: fetchError } = await supabase
           .from("recently_read")
           .select("*")
@@ -47,7 +49,6 @@ const PdfViewer = ({ selectedLanguage, userId }) => {
         }
 
         if (existingEntries.length > 0) {
-          // Delete the existing entry
           const { error: deleteError } = await supabase
             .from("recently_read")
             .delete()
@@ -60,14 +61,13 @@ const PdfViewer = ({ selectedLanguage, userId }) => {
           }
         }
 
-        // Insert the new entry with timestamp
         const { data: newData, error: insertError } = await supabase
           .from("recently_read")
           .insert([
             {
               user_id: userId,
               chapter_id: chapterId,
-              last_read: new Date().toISOString(), // current timestamp
+              last_read: new Date().toISOString(),
             },
           ]);
 
@@ -75,7 +75,7 @@ const PdfViewer = ({ selectedLanguage, userId }) => {
           console.error("Error inserting new entry:", insertError);
         } else {
           console.log("Successfully marked as read:", newData);
-          setIsMarkedAsRead(true); // Update state after successful marking
+          setIsMarkedAsRead(true);
         }
       } catch (error) {
         console.error("Error marking as read:", error);
@@ -97,7 +97,11 @@ const PdfViewer = ({ selectedLanguage, userId }) => {
 
   return (
     <div className="pdf-viewer">
-      <iframe src={pdfUrl} width="80%" height="600px" />
+      <Worker
+        workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
+      >
+        <Viewer fileUrl={pdfUrl} />
+      </Worker>
     </div>
   );
 };

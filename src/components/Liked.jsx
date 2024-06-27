@@ -115,7 +115,9 @@ const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
           ))}
         </div>
       ) : (
-        <div>You haven't liked any text chapters yet.</div>
+        <div>
+          <Loader />
+        </div>
       )}
       <h2>Liked Audiobook Chapters</h2>
       {likedAudiobookChapters.length > 0 ? (
@@ -133,7 +135,9 @@ const Liked = ({ onProtectedAction, userId, selectedLanguage }) => {
           ))}
         </div>
       ) : (
-        <div>You haven't liked any audiobook chapters yet.</div>
+        <div>
+          <Loader />
+        </div>
       )}
     </div>
   );

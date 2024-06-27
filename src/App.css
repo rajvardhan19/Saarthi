@@ -587,10 +587,10 @@ html {
   overflow: hidden;
 }
 .faheart {
-  color: rgb(166, 60, 77);
+  color: rgb(84, 58, 176);
 }
 .iosheart {
-  color: rgb(166, 60, 77);
+  color: rgb(84, 58, 176);
 }
 
 .chapter-image {
@@ -1110,7 +1110,8 @@ html {
 
 /* Pdf Viewer */
 .pdf-viewer {
-  width: 100%;
+  width: 90%;
+  margin: 0 5%;
   height: 80vh;
   display: flex;
   justify-content: center;
@@ -1129,7 +1130,7 @@ html {
   margin-left: 32%;
   margin-right: 32%;
   margin-top: 25px;
-  height: 450px;
+  height: 380px;
   object-fit: cover;
 }
 .aarti-image-audio-player {
@@ -1137,7 +1138,7 @@ html {
   margin-left: 32%;
   margin-right: 32%;
   margin-top: 25px;
-  height: 450px;
+  height: 420px;
   object-fit: cover;
 }
 .time {

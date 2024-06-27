@@ -64,15 +64,23 @@ const Header = ({
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen((prev) => !prev);
   };
 
   const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
+    setIsDarkTheme((prev) => !prev);
   };
 
   const handleBackClick = () => {
-    navigate(-1); // This will navigate back to the previous page
+    if (location.pathname.startsWith("/aarti/")) {
+      navigate("/aartis");
+    } else if (location.pathname.startsWith("/chapter/")) {
+      navigate("/read-chapters");
+    } else if (location.pathname.startsWith("/audio/")) {
+      navigate("/audiobook");
+    } else {
+      navigate(-1); // This will navigate back to the previous page
+    }
   };
 
   const handleLikeClick = () => {
@@ -180,7 +188,7 @@ const Header = ({
       </div>
       <div>
         {["/read-chapters", "/audiobook", "/"].includes(location.pathname) && (
-          <LikedButton />
+          <LikedButton onProtectedAction={onProtectedAction} />
         )}
       </div>
     </div>

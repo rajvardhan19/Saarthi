@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const LikedButton = () => {
+const LikedButton = ({ onProtectedAction }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/liked");
+    if (onProtectedAction()) {
+      navigate("/liked");
+    }
   };
 
   return (
