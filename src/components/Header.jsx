@@ -72,10 +72,12 @@ const Header = ({
   };
 
   const handleBackClick = () => {
-    if (location.pathname.startsWith("/aarti/")) {
-      navigate("/aartis");
-    } else if (location.pathname.startsWith("/chapter/")) {
+    console.log("Current pathname:", location.pathname); // Add this line for debugging
+
+    if (location.pathname.startsWith("/chapter/")) {
       navigate("/read-chapters");
+    } else if (location.pathname.startsWith("/aartis/")) {
+      navigate("/aartis");
     } else if (location.pathname.startsWith("/audio/")) {
       navigate("/audiobook");
     } else {

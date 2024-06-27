@@ -207,6 +207,9 @@ html {
   .chatbot {
     height: 70vh !important;
   }
+  .pdf-viewer {
+    height: 70vh !important;
+  }
   .card {
     height: 90px !important;
     margin-top: 0px !important;
