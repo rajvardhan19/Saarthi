@@ -27,7 +27,7 @@ const Aarti = ({ userId }) => {
       <div className="aartis-section">
         <div className="section-header-aarti">
           <h2 className="aarti-header">Aartis</h2>
-          <button onClick={() => setViewAll(!viewAll)}>
+          <button onClick={() => setViewAll(!viewAll)} className="view-all">
             {viewAll ? "Show Less" : "View All"}
           </button>
         </div>
