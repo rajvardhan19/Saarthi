@@ -43,6 +43,7 @@ const Aarti = ({ userId }) => {
                 id={aarti.id}
                 title={aarti.aarti}
                 imageSrc={aarti.aarti_image_url}
+                userId={userId}
               />
             ))
           )}

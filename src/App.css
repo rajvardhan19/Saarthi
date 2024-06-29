@@ -691,6 +691,7 @@ html {
 }
 .aarti-controls {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 .section-header-aarti button {
