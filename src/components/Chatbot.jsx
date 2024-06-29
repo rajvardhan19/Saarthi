@@ -56,6 +56,10 @@ const Chatbot = () => {
     };
   }, [location]);
 
+  const cleanText = (text) => {
+    return text.replace(/[*_~`]/g, "");
+  };
+
   const handleSendMessage = async (messageText) => {
     const text = messageText || input;
     if (text.trim() === "") return;
@@ -99,7 +103,7 @@ const Chatbot = () => {
         };
         setMessages((prevMessages) => [...prevMessages, geminiMessage]);
         if (isSpeechActive) {
-          speech.speak({ text: geminiMessage.text });
+          speech.speak({ text: cleanText(geminiMessage.text) });
         }
       } else {
         throw new Error("No response from Gemini");
@@ -115,7 +119,7 @@ const Chatbot = () => {
         },
       ]);
       if (isSpeechActive) {
-        speech.speak({ text: errorMessage });
+        speech.speak({ text: cleanText(errorMessage) });
       }
     }
     setGeneratingAnswer(false);
