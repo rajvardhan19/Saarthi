@@ -31,7 +31,6 @@ const AartiPlayer = ({ userId }) => {
 
   useEffect(() => {
     const fetchAarti = async () => {
-      console.log("Fetching aarti with id:", aartiId);
       const { data, error } = await supabase
         .from("aartis")
         .select("*")
@@ -40,13 +39,9 @@ const AartiPlayer = ({ userId }) => {
       if (error) {
         console.error("Error fetching aarti:", error);
       } else {
-        console.log("Fetched aarti:", data);
         setAarti(data);
         const publicUrl = data.aarti_url;
-        console.log("Fetched audio URL:", publicUrl);
         setAudioUrl(publicUrl);
-
-        // Set currentIndex based on fetched aarti
         const index = aartis.findIndex((aarti) => aarti.id === data.id);
         setCurrentIndex(index);
       }
@@ -56,7 +51,6 @@ const AartiPlayer = ({ userId }) => {
 
   useEffect(() => {
     if (audioUrl) {
-      console.log("Setting audio URL:", audioUrl);
       audioRef.current.src = audioUrl;
     }
   }, [audioUrl]);
@@ -82,6 +76,7 @@ const AartiPlayer = ({ userId }) => {
 
     const handleEnded = () => {
       setIsPlaying(false);
+      handleNext();
     };
 
     if (audio) {
@@ -117,6 +112,12 @@ const AartiPlayer = ({ userId }) => {
       navigator.mediaSession.setActionHandler("pause", handlePlayPause);
       navigator.mediaSession.setActionHandler("previoustrack", handlePrevious);
       navigator.mediaSession.setActionHandler("nexttrack", handleNext);
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = details.seekTime;
+          setCurrentTime(details.seekTime);
+        }
+      });
     }
   }, [aarti]);
 
@@ -143,6 +144,23 @@ const AartiPlayer = ({ userId }) => {
       navigate(`/aartis/${nextAarti.id}`);
     }
   };
+
+  useEffect(() => {
+    // Register service worker for background playback
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log(
+            "Service Worker registered with scope:",
+            registration.scope
+          );
+        })
+        .catch((error) => {
+          console.error("Service Worker registration failed:", error);
+        });
+    }
+  }, []);
 
   if (!audioUrl) {
     return (
