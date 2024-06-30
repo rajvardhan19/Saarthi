@@ -18,6 +18,29 @@ const AartiPlayer = ({ userId }) => {
   const [currentIndex, setCurrentIndex] = useState(null);
 
   useEffect(() => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new window.MediaMetadata({
+        title: aarti?.title,
+        artist: "",
+        album: "",
+        artwork: [
+          { src: aarti?.aarti_image_url, sizes: "96x96", type: "image/png" },
+          { src: aarti?.aarti_image_url, sizes: "128x128", type: "image/png" },
+          { src: aarti?.aarti_image_url, sizes: "192x192", type: "image/png" },
+          { src: aarti?.aarti_image_url, sizes: "256x256", type: "image/png" },
+          { src: aarti?.aarti_image_url, sizes: "384x384", type: "image/png" },
+          { src: aarti?.aarti_image_url, sizes: "512x512", type: "image/png" },
+        ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", handlePlayPause);
+      navigator.mediaSession.setActionHandler("pause", handlePlayPause);
+      navigator.mediaSession.setActionHandler("previoustrack", handlePrevious);
+      navigator.mediaSession.setActionHandler("nexttrack", handleNext);
+    }
+  }, [aarti]);
+
+  useEffect(() => {
     const fetchAartis = async () => {
       const { data, error } = await supabase.from("aartis").select("*");
       if (error) {

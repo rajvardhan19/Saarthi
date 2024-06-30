@@ -23,6 +23,21 @@ const App = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [session, setSession] = useState(null);
 
+  // index.js or App.js
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("/serviceWorker.js")
+      .then(function (registration) {
+        console.log(
+          "Service Worker registered with scope:",
+          registration.scope
+        );
+      })
+      .catch(function (error) {
+        console.log("Service Worker registration failed:", error);
+      });
+  }
+
   useEffect(() => {
     const getSession = async () => {
       const {
