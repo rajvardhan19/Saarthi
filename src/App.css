@@ -964,7 +964,7 @@ html {
 .chatbot {
   position: relative;
   /* Ensures no overflow on the entire container */
-  height: 80vh; /* 83% of the viewport height */
+  height: 78vh; /* 83% of the viewport height */
   display: flex;
   flex-direction: column;
   max-width: 100%; /* Optional: add max-width for better layout control */
@@ -1255,7 +1255,11 @@ html {
 .auth-modal-content button {
   margin-top: 15px;
 }
-
+.otp-input {
+  flex: 1;
+  padding: 5px;
+  font-size: 1em;
+}
 /* LIKED BUTTON */
 .button {
   width: 30%;
@@ -1390,6 +1394,7 @@ html {
   opacity: 0.75;
 }
 .login-button {
+  display: flex;
   width: 33%;
   height: 50px;
   border-radius: 9999px; /* Full rounded corners */
@@ -1399,6 +1404,8 @@ html {
   font-weight: bold;
   transition: opacity 0.3s; /* Smooth transition for opacity change */
   background-color: white;
+  justify-content: center;
+  align-items: center;
   /* padding: 0.5rem 1.5rem; Equivalent to px-6 py-2 */
 }
 
@@ -1428,4 +1435,28 @@ html {
   justify-content: center;
   align-items: center;
   height: 100vh !important;
+}
+.country-code {
+  height: 40px;
+  width: 120%;
+  font-size: 16px;
+  color: rgb(51, 51, 51);
+  margin: 0px 5px;
+  background: rgb(255, 255, 255);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(204, 204, 204);
+  border-image: initial;
+  border-radius: 5px;
+  padding: 0px 10px;
+}
+
+.send-otp {
+  width: 100%;
+  border-radius: 5px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
 }
