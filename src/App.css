@@ -246,13 +246,24 @@ html {
     height: 65vh !important;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1350px) {
   .chapter-list-homepage,
   .chapter-list-audiobook,
   .aarti-list,
   .chapter-list {
     grid-template-columns: repeat(
       4,
+      1fr
+    ) !important; /* 4 columns on medium screens */
+  }
+}
+@media (max-width: 1150px) {
+  .chapter-list-homepage,
+  .chapter-list-audiobook,
+  .aarti-list,
+  .chapter-list {
+    grid-template-columns: repeat(
+      3,
       1fr
     ) !important; /* 4 columns on medium screens */
   }
