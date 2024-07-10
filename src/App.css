@@ -99,7 +99,6 @@ html {
 .homepage-container {
   padding: 20px;
   margin: 0px 15px;
-  height: 100%; /* Make the homepage container take full height of the box */
 
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
@@ -196,7 +195,8 @@ html {
     height: calc(
       100vh - 60px
     ); /* Adjust this value based on your header/footer height */
-    margin: 0px 5px !important;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
     padding: 20px;
   }
   .box {
@@ -272,6 +272,9 @@ html {
 @media (max-width: 768px) {
   .main {
     padding-top: 0 !important;
+  }
+  .chapter-list-audiobook {
+    margin-bottom: 70px !important;
   }
   .chapter-list-homepage,
   .chapter-list-audiobook,
