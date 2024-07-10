@@ -6,11 +6,11 @@ import Loader from "./Loader";
 
 const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
   const [chapters, setChapters] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [viewAll, setViewAll] = useState(false);
   const [likedChapters, setLikedChapters] = useState([]);
   const [recentlyHeard, setRecentlyHeard] = useState([]);
   const [chapterImages, setChapterImages] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -20,6 +20,7 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
       } else {
         setChapters(data);
       }
+      setLoading(false);
     };
 
     fetchChapters();
@@ -90,6 +91,8 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
     }
   }, [chapters, selectedLanguage]);
 
+  const visibleChapters = viewAll ? chapters : chapters.slice(0, 5);
+
   if (loading) {
     return (
       <div>
@@ -98,34 +101,34 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
     );
   }
 
-  const visibleChapters = viewAll ? chapters : chapters.slice(0, 5);
-
-  const handleViewAllClick = () => {
-    setViewAll(!viewAll);
-  };
-
   return (
     <div className="main-content-audiobook">
       <div className="chapters-audiobook">
         <div className="section-header-audiobook">
           <h2>Chapters</h2>
-          <button onClick={handleViewAllClick} className="view-all">
+          <button onClick={() => setViewAll(!viewAll)} className="view-all">
             {viewAll ? "Show Less" : "View All"}
           </button>
         </div>
         <div className="chapter-list-audiobook">
-          {visibleChapters.map((chapter) => (
-            <ChapterCardAudiobook
-              key={chapter.id}
-              title={chapter.title}
-              imageSrc={chapterImages[chapter.id]}
-              chapterId={chapter.id}
-              selectedLanguage={selectedLanguage}
-              userId={userId}
-              initialIsLiked={likedChapters.includes(chapter.id)}
-              onProtectedAction={onProtectedAction}
-            />
-          ))}
+          {visibleChapters.length === 0 ? (
+            <div>
+              <Loader />
+            </div>
+          ) : (
+            visibleChapters.map((chapter) => (
+              <ChapterCardAudiobook
+                key={chapter.id}
+                title={chapter.title}
+                imageSrc={chapterImages[chapter.id]}
+                chapterId={chapter.id}
+                selectedLanguage={selectedLanguage}
+                userId={userId}
+                initialIsLiked={likedChapters.includes(chapter.id)}
+                onProtectedAction={onProtectedAction}
+              />
+            ))
+          )}
         </div>
       </div>
       {!viewAll && (
