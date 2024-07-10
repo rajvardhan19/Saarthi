@@ -865,6 +865,7 @@ html {
   padding: 20px;
   flex: 1;
   overflow-y: auto;
+  margin-bottom: 70px;
 }
 .main-content-aarti {
   padding: 20px;
@@ -1470,4 +1471,7 @@ html {
   padding: 10px;
   cursor: pointer;
   border: none;
+}
+.main-main {
+  margin-bottom: 70px;
 }

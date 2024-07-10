@@ -102,7 +102,7 @@ const MainContent = ({ onProtectedAction, userId, selectedLanguage }) => {
   };
 
   return (
-    <div>
+    <div className="main-main">
       <div className="main-content">
         <div className="chapters">
           <div className="section-header">
