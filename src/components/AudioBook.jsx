@@ -6,6 +6,7 @@ import Loader from "./Loader";
 
 const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
   const [chapters, setChapters] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [viewAll, setViewAll] = useState(false);
   const [likedChapters, setLikedChapters] = useState([]);
   const [recentlyHeard, setRecentlyHeard] = useState([]);
@@ -89,36 +90,42 @@ const AudioBook = ({ selectedLanguage, userId, onProtectedAction }) => {
     }
   }, [chapters, selectedLanguage]);
 
+  if (loading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
+
   const visibleChapters = viewAll ? chapters : chapters.slice(0, 5);
+
+  const handleViewAllClick = () => {
+    setViewAll(!viewAll);
+  };
 
   return (
     <div className="main-content-audiobook">
       <div className="chapters-audiobook">
         <div className="section-header-audiobook">
           <h2>Chapters</h2>
-          <button onClick={() => setViewAll(!viewAll)} className="view-all">
+          <button onClick={handleViewAllClick} className="view-all">
             {viewAll ? "Show Less" : "View All"}
           </button>
         </div>
         <div className="chapter-list-audiobook">
-          {visibleChapters.length === 0 ? (
-            <div>
-              <Loader />
-            </div>
-          ) : (
-            visibleChapters.map((chapter) => (
-              <ChapterCardAudiobook
-                key={chapter.id}
-                title={chapter.title}
-                imageSrc={chapterImages[chapter.id]}
-                chapterId={chapter.id}
-                selectedLanguage={selectedLanguage}
-                userId={userId}
-                initialIsLiked={likedChapters.includes(chapter.id)}
-                onProtectedAction={onProtectedAction}
-              />
-            ))
-          )}
+          {visibleChapters.map((chapter) => (
+            <ChapterCardAudiobook
+              key={chapter.id}
+              title={chapter.title}
+              imageSrc={chapterImages[chapter.id]}
+              chapterId={chapter.id}
+              selectedLanguage={selectedLanguage}
+              userId={userId}
+              initialIsLiked={likedChapters.includes(chapter.id)}
+              onProtectedAction={onProtectedAction}
+            />
+          ))}
         </div>
       </div>
       {!viewAll && (

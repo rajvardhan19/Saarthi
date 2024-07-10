@@ -5,6 +5,7 @@ import Loader from "./Loader";
 
 const Aarti = ({ userId }) => {
   const [aartis, setAartis] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [viewAll, setViewAll] = useState(false);
 
   useEffect(() => {
@@ -15,38 +16,45 @@ const Aarti = ({ userId }) => {
       } else {
         setAartis(data);
       }
+      setLoading(false);
     };
 
     fetchAartis();
   }, []);
 
+  if (loading) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
+
   const visibleAartis = viewAll ? aartis : aartis.slice(0, 10);
+
+  const handleViewAllClick = () => {
+    setViewAll(!viewAll);
+  };
 
   return (
     <div className="main-content-aarti">
       <div className="aartis-section">
         <div className="section-header-aarti">
           <h2 className="aarti-header">Aartis</h2>
-          <button onClick={() => setViewAll(!viewAll)} className="view-all">
+          <button onClick={handleViewAllClick} className="view-all">
             {viewAll ? "Show Less" : "View All"}
           </button>
         </div>
         <div className="aarti-list">
-          {visibleAartis.length === 0 ? (
-            <p>
-              <Loader />
-            </p>
-          ) : (
-            visibleAartis.map((aarti) => (
-              <AartiCard
-                key={aarti.id}
-                id={aarti.id}
-                title={aarti.aarti}
-                imageSrc={aarti.aarti_image_url}
-                userId={userId}
-              />
-            ))
-          )}
+          {visibleAartis.map((aarti) => (
+            <AartiCard
+              key={aarti.id}
+              id={aarti.id}
+              title={aarti.aarti}
+              imageSrc={aarti.aarti_image_url}
+              userId={userId}
+            />
+          ))}
         </div>
       </div>
     </div>
