@@ -99,7 +99,7 @@ html {
 .homepage-container {
   padding: 20px;
   margin: 0px 15px;
-
+  margin-bottom: 20px;
   box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 .dropdown-menu {
@@ -192,9 +192,6 @@ html {
 
 @media screen and (max-width: 768px) {
   .homepage-container {
-    height: calc(
-      100vh - 60px
-    ); /* Adjust this value based on your header/footer height */
     margin-left: 5px !important;
     margin-right: 5px !important;
     padding: 20px;
